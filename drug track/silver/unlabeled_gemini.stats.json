@@ -1,0 +1,22 @@
+{
+  "items": 1038,
+  "labeled": 1038,
+  "failed": [],
+  "non_verbatim_spans": 71,
+  "span_check": {
+    "ok": 1064,
+    "dropped": 57,
+    "fixed_fuzzy": 12,
+    "fixed_norm": 2
+  },
+  "checked_out": "out/teacher/unlabeled_gemini_api_low.checked.jsonl",
+  "models_served": {
+    "gemini-3.8-flash": 1038
+  },
+  "tokens": {
+    "input": 4908149,
+    "candidates": 120676,
+    "thoughts": 0,
+    "cached": 479217
+  }
+}
