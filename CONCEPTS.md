@@ -31,11 +31,17 @@ The shortest phrase, copied exactly from the item text, that justifies an aspect
 ### Gold label
 The answer key for an item. For this track most gold labels were drafted by a frontier model and then corrected by reviewer rulings, so matching the drafter's habits matters as much as clinical truth.
 
+### Silver label
+A label on an unlabeled item written by the frontier teacher model under the labeling guide, standing in for gold. A silver hold-out is a set of these, sampled to match test's source mix and never used for training or few-shot, that ranks changes dev is too small to tell apart. Silver rewards the teacher's habits, which are close to the gold drafter's but are not ground truth.
+
 ### Composite
 The leaderboard score: the plain average of seven parts covering signal type, actionable, which aspects are filled, polarity, speaker, span overlap, and whether spans are verbatim.
 
 ### Matched aspect
-An aspect that both the gold label and the prediction fill for the same item. Polarity, speaker and span are scored only over matched aspects, so a missed aspect costs far less than a wrong one.
+An aspect that both the gold label and the prediction fill for the same item. Polarity, speaker and span are scored only over matched aspects. So an extra aspect that gold leaves empty costs only aspect precision, about as much as a missed one, while a matched aspect with the wrong polarity or a long span also drags down the matched-only parts.
+
+### Oracle run
+An upper-bound experiment that replaces chosen fields of a real prediction with gold, to measure how much a perfect version of one lever could add. It bounds only the fields it fills, for example one metric or one source, so its result is that lever's ceiling, never the whole system's.
 
 ### QWK cliff
 The scorer behaviour where polarity agreement reads as perfect when every matched aspect has the same polarity, then collapses to zero as soon as one gold label differs. It is a large tail risk for any system whose matched aspects all share one polarity.
