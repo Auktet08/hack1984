@@ -346,6 +346,9 @@ curl -s http://localhost:11434/api/chat -d '{
 
 ### Stage 4. Clause splitter and trimmer [Model] (about 1.5 h, parallel with stage 3)
 
+> **Trimmer details:** `docs/plans/2026-11-07-1745-trim-plan.md` (what gold quotes look like, the trim steps, how to
+> measure and when to keep it). The trim bullets below are the minimum; that plan replaces them.
+
 `drug track/src/inference/clauses.py` provides `split(text) -> [{id, start, end, text}]` and `trim(clause_text, n=14)`.
 - **Sentences first,** never across `…` or `[...]`.
 - **Then clauses:** split on `, ; : — (`, and before "that", wh-words and subordinating conjunctions. Split on "and"/"or" only when
