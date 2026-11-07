@@ -1,0 +1,21 @@
+{
+  "purpose": "Startup idea 5 probe: compare mobocertinib vs poziotinib as analog launches (volume, dates, quotable sentiment); also locate poziotinib ODAC transcript (idea 1)",
+  "drugs": {
+    "mobocertinib": {"prefix": "MB", "product": "M", "queries": [
+      {"query": "news article on the FDA accelerated approval of Takeda's mobocertinib (Exkivity) for EGFR exon 20 insertion lung cancer", "startPublishedDate": "2021-04-01", "endPublishedDate": "2021-12-31", "category": "news"},
+      {"query": "oncologists and nurses discuss managing mobocertinib diarrhea and rash in practice", "startPublishedDate": "2021-06-01", "endPublishedDate": "2023-12-31"},
+      {"query": "comparison of mobocertinib and amivantamab for EGFR exon 20 insertion NSCLC, which to use", "startPublishedDate": "2021-06-01", "endPublishedDate": "2023-12-31"},
+      {"query": "Takeda Exkivity launch uptake, sales and market performance", "startPublishedDate": "2021-09-01", "endPublishedDate": "2023-12-31", "category": "news"},
+      {"query": "EXCLAIM-2 phase 3 trial of mobocertinib versus chemotherapy first-line results", "startPublishedDate": "2022-06-01", "endPublishedDate": "2024-06-30"},
+      {"query": "Takeda withdraws mobocertinib Exkivity from the market after confirmatory trial fails", "startPublishedDate": "2023-09-01", "endPublishedDate": "2024-06-30", "category": "news"}
+    ]},
+    "poziotinib": {"prefix": "PZ", "product": "P", "queries": [
+      {"query": "Spectrum Pharmaceuticals poziotinib ZENITH20 results in HER2 exon 20 lung cancer, response rate and toxicity", "startPublishedDate": "2020-01-01", "endPublishedDate": "2022-08-31"},
+      {"query": "Spectrum submits new drug application for poziotinib, FDA accepts with priority review", "startPublishedDate": "2021-06-01", "endPublishedDate": "2022-08-31", "category": "news"},
+      {"query": "FDA Oncologic Drugs Advisory Committee votes against poziotinib", "startPublishedDate": "2022-09-01", "endPublishedDate": "2022-10-31", "category": "news"},
+      {"query": "FDA complete response letter rejects poziotinib, Spectrum Pharmaceuticals restructures", "startPublishedDate": "2022-11-01", "endPublishedDate": "2023-12-31", "category": "news"},
+      {"query": "oncologist commentary on poziotinib dosing, rash and diarrhea and whether it adds value", "startPublishedDate": "2020-01-01", "endPublishedDate": "2023-06-30"},
+      {"query": "verbatim transcript PDF of the FDA Oncologic Drugs Advisory Committee meeting September 22 2022 on poziotinib", "startPublishedDate": "2022-09-01", "endPublishedDate": "2023-12-31", "n": 5}
+    ]}
+  }
+}
