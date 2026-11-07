@@ -7,7 +7,7 @@
 pitch. **Late-evening revision:** the competition theme is privacy-first startups, so the pitch now follows Within3's
 business model but puts the AI on the customer's own hardware (§10). The private transcript is the main demo. The
 mobocertinib comparison drops to one optional slide. The ideas behind it, and the ones we rejected, are in
-`../docs/ideation/2026-11-07-startup-pitch-ideation.html` (ideas 1, 4 and 5 combined). The working name still needs a
+`../docs/ideation/2026-11-07-startup-pitch-ideation.html` (ideas 1, 3 and 4 combined; idea 5 is now one optional slide). The working name still needs a
 name-conflict search before it goes on a slide.
 
 ---
@@ -111,10 +111,20 @@ side-effect mentions stay inside, and every label points to its exact quote.
   life-sciences staff found 65% of the top 20 pharmas had banned ChatGPT, mostly over leaks of sensitive data (Fierce
   Pharma, April 2024, checked 2026-11-07). Endpoints reported it as "restrict", so the slide says "banned or
   restricted".
-- **Side-effect mentions create a legal duty.** ICH E2D(R1) treats company-run digital listening as a source of
-  adverse-event reports, and the clock starts when a reviewer identifies one. Companies want to control where that text
-  goes and keep an audit trail. Locally, the data never moves and every flag points to its exact quote (report D,
-  fact 1).
+- **Side-effect mentions create a legal duty, and screening for them is mandatory work.** This is the strongest
+  privacy-first argument we have, and the way into an account (§8).
+  - ICH E2D(R1), final since Sep 2025, says companies should regularly screen digital platforms under their
+    responsibility for adverse events. Per report D, the reporting clock starts when a reviewer identifies a case
+    that meets the four minimum criteria.
+  - EPHMRA's guidelines (2025) say agencies running company-commissioned market research must report **any** adverse
+    event, serious or not. Amgen's supplier contract asks vendors to catch reportable events from all sources.
+  - Today people read every transcript and note line by line. Pierce 2017 (report D, not re-checked): 935,246 posts
+    gave 13 cases for review after three months of manual work.
+  - Side-effect text holds patients' health details, and the company is legally responsible for it. Our flag checks
+    the four criteria, points every box at its exact quote, and logs the reviewer's decision as an audit trail, all on
+    the customer's hardware.
+  - Always say "triage candidate", never "reportable". A person makes every decision, and the 2B's recall is
+    unmeasured.
 - **It avoids a long IT approval.** A new cloud vendor touching confidential data needs security and legal reviews.
   Software that runs offline on the company's own hardware is an easier yes.
 - **It's cheap at volume.** Once installed, a local model costs close to nothing per item. We will measure cost per 100
@@ -176,8 +186,10 @@ aren't agreed yet.
 **Order:** S3 and S1 first (they feed S4 overnight), then S2, S5, S6 and S7 on Sunday morning.
 
 **Demo flow (fits `PROBLEM.md` §8):**
-1. Air-gap: network off, load the poziotinib meeting transcript, and show labeled turns, a safety flag and the gap view,
-   all from the local model.
+1. Air-gap: network off, load the poziotinib meeting transcript, and show labeled turns, the safety flag and the gap
+   view, all from the local model. For the safety flag, show the pair: the caregiver in the open public hearing ("my
+   wife Bobbi… diarrhea… rash", positive in tone) fires all four boxes, and an FDA reviewer's trial statistic doesn't.
+   Point out that a sentiment tool would score the caregiver positive and miss the case.
 2. Feed: a Tagrisso/Rybrevant signal card, clicked through to its quote.
 3. Live: network on, Tavily pulls a fresh public item, and the local model labels it.
 4. Optional: the mobocertinib slide (S5).
