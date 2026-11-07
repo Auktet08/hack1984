@@ -1,0 +1,2 @@
+{"ts":"2026-11-07T00:00:00Z","who":"claude","tool":"exa","endpoint":"search (MCP)","bucket":"ad-hoc","purpose":"Qwen3.5 model sizes for student choice","credits":null,"usd":null,"note":"MCP does not return costDollars; ~1 search with highlights","out":null}
+{"ts":"2026-11-07T00:00:00Z","who":"claude","tool":"exa","endpoint":"search (MCP)","bucket":"ad-hoc","purpose":"Gemma 4 model sizes for student choice","credits":null,"usd":null,"note":"MCP does not return costDollars; ~1 search with highlights","out":null}

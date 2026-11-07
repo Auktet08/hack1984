@@ -1,0 +1,13 @@
+# Organisers' package files: not ours to redistribute (README asks not to post; contains PubMed text).
+# Our own files inside drug track/ (PROBLEM.md, DATA.md, RESEARCH_README.md, analysis/, research/, src/) ARE tracked.
+drug track/README.md
+drug track/LABELING_GUIDE.md
+drug track/sample_submission.jsonl
+drug track/data/
+drug track/scoring/
+drug track/tools/
+# Generated predictions, scores, model weights
+drug track/out/
+drug track/models/
+*:Zone.Identifier
+__pycache__/

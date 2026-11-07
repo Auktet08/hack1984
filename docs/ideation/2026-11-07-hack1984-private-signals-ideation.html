@@ -1,0 +1,311 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ideation: HACK1984 Private Signals</title>
+<style>
+:root{--bg:#fbfaf7;--fg:#1f2328;--muted:#5b6370;--line:#e3e0d8;--card:#ffffff;--accent:#2f5d8a;--accent-soft:#e6eef7;--accent-text:#1f4468;--good-soft:#e5f3ea;--good-text:#1d5a34;--warn-soft:#fbf0dc;--warn-text:#7a4b06;--bad-soft:#f8e3e1;--bad-text:#8a2a20;--bar-rule:#2f7d4f;--bar-model:#2f5d8a;}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#16181c;--fg:#e6e6e3;--muted:#a3a9b3;--line:#2e3239;--card:#1d2026;--accent:#7fb0e0;--accent-soft:#1f2c3b;--accent-text:#b9d6f2;--good-soft:#1b2f22;--good-text:#9fd8b2;--warn-soft:#33280f;--warn-text:#f0cf8f;--bad-soft:#3a1f1c;--bad-text:#f2b0a8;--bar-rule:#5fb382;--bar-model:#6fa3d6;}}
+:root[data-theme="dark"]{--bg:#16181c;--fg:#e6e6e3;--muted:#a3a9b3;--line:#2e3239;--card:#1d2026;--accent:#7fb0e0;--accent-soft:#1f2c3b;--accent-text:#b9d6f2;--good-soft:#1b2f22;--good-text:#9fd8b2;--warn-soft:#33280f;--warn-text:#f0cf8f;--bad-soft:#3a1f1c;--bad-text:#f2b0a8;--bar-rule:#5fb382;--bar-model:#6fa3d6;}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:15.5px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif}
+main{max-width:900px;margin-inline:auto;padding:32px 16px 64px}
+p,li,dd{max-width:72ch}
+h1{font-size:1.75rem;line-height:1.25;margin:.2em 0 .3em}
+h2{font-size:1.3rem;margin:2.2em 0 .6em;padding-bottom:.25em;border-bottom:1px solid var(--line)}
+h3{font-size:1.1rem;margin:0 0 .4em}
+.eyebrow{font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.meta{display:flex;flex-wrap:wrap;gap:6px 18px;color:var(--muted);font-size:.9rem;margin:.4em 0 1.2em}
+.meta b{color:var(--fg);font-weight:600}
+strong{color:inherit}
+code{font:0.88em ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;background:var(--accent-soft);color:var(--accent-text);padding:1px 5px;border-radius:4px}
+.verdict{background:var(--good-soft);color:var(--good-text);border-radius:10px;padding:16px 18px;margin:1em 0}
+.verdict p{margin:.4em 0;color:var(--fg)}
+.verdict .eyebrow{color:var(--good-text)}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;margin:1.2em 0}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 14px}
+.stat .n{font-size:1.5rem;font-weight:700;font-variant-numeric:tabular-nums}
+.stat .l{font-size:.85rem;color:var(--muted);line-height:1.35}
+ul.jump{columns:2;column-gap:28px;padding-left:1.1em}
+@media (max-width:640px){ul.jump{columns:1}}
+article.idea{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin:16px 0}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:.2em 0 .8em}
+.chip{font-size:.78rem;font-weight:600;padding:2px 10px;border-radius:999px;border:1px solid transparent}
+.chip.id{background:var(--accent-soft);color:var(--accent-text)}
+.chip.ax{background:var(--warn-soft);color:var(--warn-text)}
+.chip.cf{background:var(--good-soft);color:var(--good-text)}
+dl.fields{margin:0}
+dl.fields dt{font-size:.75rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:700;margin-top:.8em}
+dl.fields dd{margin:.15em 0 0}
+.callout{background:var(--warn-soft);border-radius:10px;padding:12px 16px;margin:1em 0}
+.callout .eyebrow{color:var(--warn-text)}
+.callout p{margin:.3em 0}
+table{border-collapse:collapse;width:100%;font-size:.92rem;margin:.6em 0}
+th,td{border-bottom:1px solid var(--line);padding:8px 8px;text-align:left;vertical-align:top}
+th{font-size:.78rem;letter-spacing:.05em;text-transform:uppercase;color:var(--muted)}
+.tablewrap{overflow-x:auto}
+figure{margin:1em 0}
+figcaption{font-size:.85rem;color:var(--muted);margin-top:.3em}
+svg text{fill:var(--fg);font-family:inherit}
+footer.composition-signal{margin-top:3em;padding-top:1em;border-top:1px solid var(--line);font-size:.82rem;color:var(--muted)}
+</style>
+</head>
+<body>
+<main>
+<div class="eyebrow">Ideation · go / no-go</div>
+<h1>Ideation: HACK1984 Track 1, Private Signals</h1>
+<div class="meta">
+  <span><b>Date:</b> <time datetime="2026-11-07">2026-11-07</time></span>
+  <span><b>Topic:</b> hack1984-private-signals</span>
+  <span><b>Focus:</b> is this track worth pursuing, and what would win it</span>
+  <span><b>Mode:</b> elsewhere-software (evaluating a hackathon data package in this folder)</span>
+</div>
+
+<section class="verdict" aria-label="Verdict">
+  <div class="eyebrow">Verdict</div>
+  <p><strong>Go, if the event's prize and time justify roughly 1–2 days of work.</strong> The track is unusually cheap to score well in. Rules taken straight from the labeling guide, with no model at all, score <strong>0.731</strong> composite on the 60 dev items. Adding title regexes fitted to dev lifts that to <strong>0.844</strong>. Your 4 GB laptop GPU is enough to build and run it, and the PubMed setup step works (0 hash mismatches on dev and test).</p>
+  <p><strong>The catch:</strong> because a careful rules system already gets most of the way, many teams will likely cluster near the top. Dev is too small (±0.055 at 95%) to tell entries apart reliably. So the edge probably comes from the judged criteria: usefulness, privacy and cost per 100 items. That is a reasoned guess. Nothing public exists about prizes, judging weights, timeline or the organisers' hardware.</p>
+</section>
+
+<div class="stats">
+  <div class="stat"><div class="n">0.731</div><div class="l">dev composite, guide rules only, no model</div></div>
+  <div class="stat"><div class="n">0.844</div><div class="l">dev composite with dev-fitted title regexes (in-sample)</div></div>
+  <div class="stat"><div class="n">88 / 240</div><div class="l">test items handled fully by parsers (ctgov, fda_event, fda_label/notice)</div></div>
+  <div class="stat"><div class="n">−0.143</div><div class="l">composite lost if one fda_event gold polarity isn't −1 (QWK cliff)</div></div>
+</div>
+
+<section id="grounding-context">
+<h2>Topic Context</h2>
+<ul>
+  <li><strong>Task.</strong> For each item about Tagrisso (A) or Rybrevant/Lazcluze (B), output: signal type (9 classes), actionable yes/no, and five aspects. Each aspect is null or has polarity −2..+2, a speaker (7 classes) and a verbatim span. The model must run self-hosted and offline. Final scoring runs on the organisers' hardware with the network off.</li>
+  <li><strong>Data.</strong> 60 dev items, of which only 15 were human-reviewed; the other 45 were drafted by a frontier model, then the reviewers' rulings were applied. 240 test items, 1,733 unlabeled.</li>
+  <li><strong>Test sources.</strong> PubMed 104, ctgov 40, fda_event 37, news 30, press release 18, fda_label 10, fda_notice 1.</li>
+  <li><strong>Dev label distribution.</strong>
+    <ul>
+      <li>Signal: efficacy 21, safety 16, trial_update 10, none 7, regulatory 2. Four classes have a single example each.</li>
+      <li>Actionable: 12/60 yes.</li>
+      <li>Aspects: 23/60 items have none. Efficacy 22, safety 22, evidence_quality 8, convenience 3, access_cost 1.</li>
+    </ul>
+  </li>
+  <li><strong>Scorer.</strong> The composite is the plain mean of 7 parts: signal macro-F1, actionable F1, aspect F1, polarity QWK, speaker accuracy, span token-F1 and citation validity. Four of the seven (QWK, speaker, span, citation) are computed only over matched or predicted aspects.</li>
+  <li><strong>Speaker</strong> is fixed by source for every non-fda_event aspect (46/46 on dev). For fda_event it follows the reporter field.</li>
+  <li><strong>PubMed fetch</strong> verified: 26/26 dev and 104/104 test abstracts match their hashes, and all 31 PubMed gold spans are verbatim. 1 of 896 unlabeled abstracts has changed since the freeze.</li>
+  <li><strong>Your hardware:</strong> RTX 3050 Ti, 4 GB VRAM, 23 GB RAM, 16 threads. A 3–4B instruct model at Q4 fits on the GPU. A 7–8B model at Q4 runs with CPU offload; it is slow but fine for about 150 model-routed items.</li>
+  <li><strong>Outside sources:</strong> nothing public about HACK1984, Within3's judging or prizes. Most model and tooling claims from web research could not be checked against primary sources.</li>
+</ul>
+</section>
+
+<section id="topic-axes">
+<h2>Topic Axes</h2>
+<ol>
+  <li>Go / no-go: fit, ceiling and risk for you</li>
+  <li>Deterministic layer: rules routed by source</li>
+  <li>Model layer: PubMed, news and press extraction</li>
+  <li>Metric mechanics: what the composite actually rewards</li>
+  <li>Judging beyond the leaderboard: usefulness, cost per 100 items, privacy</li>
+</ol>
+</section>
+
+<section id="ranked-ideas">
+<h2>Ranked Ideas</h2>
+<ul class="jump">
+  <li><a href="#i1">1. Rules-first router, guide rulings as hard overrides</a></li>
+  <li><a href="#i2">2. Optimise against the scorer's own mechanics</a></li>
+  <li><a href="#i3">3. Extractive spans: the model points, code quotes</a></li>
+  <li><a href="#i4">4. Imitate the drafter with a small offline model</a></li>
+  <li><a href="#i5">5. Build an honest validation set and keep test out of it</a></li>
+  <li><a href="#i6">6. Pitch the judges: a launch-team digest</a></li>
+</ul>
+
+<article class="idea" id="i1">
+<h3>1. Rules-first router, guide rulings as hard overrides</h3>
+<div class="chips"><span class="chip id">I1</span><span class="chip ax">Deterministic layer</span><span class="chip cf">Conf 85%</span><span class="chip cf">Complexity Low</span></div>
+<dl class="fields">
+<dt>Description</dt>
+<dd>Route by source before any model sees an item:
+  <ul>
+    <li><strong>ctgov:</strong> trial_update, actionable no, no aspects unless the stop reason says futility or toxicity.</li>
+    <li><strong>fda_event:</strong> safety, safety −1, span = the reaction words, speaker from the reporter field. A small lookup table handles the special reactions (off-label use → null; disease progression → efficacy −1; can't afford → access_cost −1).</li>
+    <li><strong>fda_label / fda_notice:</strong> map by section name.</li>
+  </ul>
+  A model only sees PubMed, news and press items, and its output then passes through the same code: the speaker comes from the source table, and rulings 1–10 override what the model said (for example "well tolerated" → safety +1, an earnings release → competitor_move with no aspects).</dd>
+<dt>Basis</dt>
+<dd><code>direct:</code> Guide-only rules score 0.731 composite on dev with no model; the verifier re-ran this. 88/240 test items are ctgov, fda_event or fda_label/notice. The source-to-speaker table matches 46/46 non-fda_event gold aspects. Dev ctgov actionable is 10/10 "no".</dd>
+<dt>Rationale</dt>
+<dd>Over a third of the test set becomes zero-cost and close to deterministic. Overrides remove whole kinds of model error, so a 3–4B model can compete with a much larger one.</dd>
+<dt>Downsides</dt>
+<dd>There is no dev gold for fda_notice or for ctgov stops, so those rules rest on the guide alone. The guide says new phase 3 registrations are "usually" actionable, but dev disagrees; keep ctgov actionable at "no".</dd>
+</dl>
+<figure>
+<svg viewBox="0 0 640 96" width="100%" role="img" aria-label="Test items split: 88 by rules, 152 by model">
+  <rect x="0" y="22" width="235" height="34" rx="4" fill="var(--bar-rule)"/>
+  <rect x="237" y="22" width="403" height="34" rx="4" fill="var(--bar-model)"/>
+  <text x="8" y="16" font-size="13">Rules only · 88 items</text>
+  <text x="245" y="16" font-size="13">Small model + overrides · 152 items</text>
+  <text x="8" y="78" font-size="12">ctgov 40 · fda_event 37 · fda_label/notice 11</text>
+  <text x="245" y="78" font-size="12">PubMed 104 · news 30 · press 18</text>
+</svg>
+<figcaption>How the 240 test items split between parsers and the model.</figcaption>
+</figure>
+</article>
+
+<article class="idea" id="i2">
+<h3>2. Optimise against the scorer's own mechanics</h3>
+<div class="chips"><span class="chip id">I2</span><span class="chip ax">Metric mechanics</span><span class="chip cf">Conf 80%</span><span class="chip cf">Complexity Low</span></div>
+<dl class="fields">
+<dt>Description</dt>
+<dd>Four guards, all tuned against the composite itself:
+  <ol>
+    <li><strong>QWK cliff.</strong> Make sure the matched polarities are never all identical. A rules-only system's matched aspects are all fda_event −1. If one gold label is different, QWK falls from 1.0 to 0. A few confident positive aspects (PubMed cue words, press-release efficacy) remove that risk.</li>
+    <li><strong>Precision over recall.</strong> Set the aspect-emit threshold on the composite, not on aspect F1. A missed aspect costs only one of the seven parts; a wrong one can hurt up to four.</li>
+    <li><strong>Never empty.</strong> Never submit with zero aspects.</li>
+    <li><strong>Rare classes.</strong> Give a best guess for rare signal classes that are probably in test (guideline, expert_opinion, access_pricing).</li>
+  </ol></dd>
+<dt>Basis</dt>
+<dd><code>direct:</code> The verifier reproduced each of these.
+  <ul>
+    <li><code>score.py</code> returns QWK 1.0 when the expected-agreement term is 0.</li>
+    <li>On dev, one deviant gold polarity drops the composite from 0.844 to 0.701. With 11 cue-word PubMed aspects added, it holds at 0.860.</li>
+    <li>Zero aspects scores 0.167.</li>
+    <li>Macro-F1 averages only the classes present in gold.</li>
+  </ul></dd>
+<dt>Rationale</dt>
+<dd>These are the largest swings in the whole system, and each one is a few lines of code. The QWK cliff is a 0.14 tail risk that sits on a mostly unreviewed, model-drafted gold set.</dd>
+<dt>Downsides</dt>
+<dd>A guess at a rare class costs a true positive in a big class when it's wrong; only do it where the cues are strong. Dev is too small to tune thresholds finely (see idea 5).</dd>
+</dl>
+<figure>
+<svg viewBox="0 0 640 130" width="100%" role="img" aria-label="Composite: 0.844 baseline, 0.701 with one deviant label, 0.860 hedged">
+  <text x="0" y="24" font-size="13">Rules v2, dev gold</text>
+  <rect x="200" y="10" width="380" height="20" rx="3" fill="var(--bar-model)"/><text x="588" y="25" font-size="13">0.844</text>
+  <text x="0" y="64" font-size="13">One fda_event label ≠ −1</text>
+  <rect x="200" y="50" width="316" height="20" rx="3" fill="var(--bad-text)"/><text x="524" y="65" font-size="13">0.701</text>
+  <text x="0" y="104" font-size="13">Same, with cue-word hedge</text>
+  <rect x="200" y="90" width="388" height="20" rx="3" fill="var(--bar-rule)"/><text x="596" y="105" font-size="13">0.860</text>
+</svg>
+<figcaption>Bar lengths are proportional to the composite (0 to 1 scale, truncated view).</figcaption>
+</figure>
+</article>
+
+<article class="idea" id="i3">
+<h3>3. Extractive spans: the model points, code quotes</h3>
+<div class="chips"><span class="chip id">I3</span><span class="chip ax">Model layer</span><span class="chip cf">Conf 75%</span><span class="chip cf">Complexity Low–Med</span></div>
+<dl class="fields">
+<dt>Description</dt>
+<dd>The span pipeline:
+  <ol>
+    <li>Strip the navigation boilerplate from press releases.</li>
+    <li>Split each text into numbered sentences, never across a "…".</li>
+    <li>Have the model return an aspect, a polarity and a sentence number, not free text.</li>
+    <li>Code trims the sentence to the clause around the cue word, about 6–10 tokens.</li>
+    <li>Snap any free-text answer to an exact substring, or drop it.</li>
+  </ol></dd>
+<dt>Basis</dt>
+<dd><code>direct:</code> Citation validity is a case-sensitive <code>in</code> check, so an invented quote scores zero, and span F1 is a lowercase bag-of-words F1 (<code>score.py</code>). The first crude cue-word pass cut words in half and dropped span F1 from 0.91 to 0.72; trimming to word and clause boundaries brought it back to 0.82. Press releases have a median of about 8.4k characters and start with site navigation text.</dd>
+<dt>Rationale</dt>
+<dd>Citation validity is guaranteed at 1.0, the model writes fewer output tokens (which helps cost per 100 items), and span F1 stops depending on how well a small model copies text.</dd>
+<dt>Downsides</dt>
+<dd>A clause trimmer needs some hand-tuning. Sentence splitting on abstracts with odd punctuation can misfire.</dd>
+</dl>
+</article>
+
+<article class="idea" id="i4">
+<h3>4. Imitate the drafter with a small offline model</h3>
+<div class="chips"><span class="chip id">I4</span><span class="chip ax">Model layer</span><span class="chip cf">Conf 65%</span><span class="chip cf">Complexity Medium</span></div>
+<dl class="fields">
+<dt>Description</dt>
+<dd>Most of the gold was written by a frontier model following the guide, so aim at its habits rather than at medical truth:
+  <ul>
+    <li>Put the relevant guide section and rulings verbatim in the prompt.</li>
+    <li>Add the closest dev examples from the same source as few-shot.</li>
+    <li>Keep the guide's "pick the milder level" rule.</li>
+    <li>Run cue-word triggers first ("retrospective" → evidence_quality −1, "well tolerated" → safety +1, "significantly improved", "immature"). The model only decides what the triggers miss and picks signal type for PubMed, news and press items.</li>
+  </ul>
+  A 3–4B instruct model at Q4 on your GPU, or 7–8B with CPU offload.</dd>
+<dt>Basis</dt>
+<dd><code>direct:</code> 45 of 60 dev labels were frontier-drafted (README). A cue-word pass with no model added 11 PubMed aspects and lifted dev from 0.844 to 0.862, but it was fitted to dev, so treat that as an upper bound. <code>external:</code> In pharmacovigilance event extraction, BM25-selected few-shot examples worked best (arXiv 2402.15663).</dd>
+<dt>Rationale</dt>
+<dd>The model's job shrinks to about 150 items and a narrow decision. That keeps it inside your hardware and makes cost per 100 items close to zero.</dd>
+<dt>Downsides</dt>
+<dd>The expected gain over rules alone is modest: roughly +0.01 to +0.03 in simulation. Wrong polarities on borderline real-world studies (+2 where gold says +1) erase the gain, as the first cue-word pass showed.</dd>
+</dl>
+</article>
+
+<article class="idea" id="i5">
+<h3>5. Build an honest validation set and keep test out of it</h3>
+<div class="chips"><span class="chip id">I5</span><span class="chip ax">Go / no-go risk</span><span class="chip cf">Conf 70%</span><span class="chip cf">Complexity Medium</span></div>
+<dl class="fields">
+<dt>Description</dt>
+<dd>Hand-label about 100 items from the unlabeled pool, chosen where rules and model disagree (news, press, PubMed reviews, protocols, case reports), and use them with dev to make decisions. Write every rule from the guide, dev and the unlabeled set only. Never read test inputs while designing rules. Treat the generator's exploratory test predictions and test-input printouts from this session as off-limits, and rebuild rules cleanly.</dd>
+<dt>Basis</dt>
+<dd><code>direct:</code>
+  <ul>
+    <li>A bootstrap 95% interval for the dev composite is about 0.754–0.864, so dev can't separate changes under about 5 points.</li>
+    <li>Four signal classes have one dev example each.</li>
+    <li>The README bans only hand-labelling test items.</li>
+    <li>The verifier found that an exploratory script here printed test-input titles and reaction vocabulary. It didn't look at labels, but it breaks the spirit of the rule.</li>
+  </ul></dd>
+<dt>Rationale</dt>
+<dd>Without this, most of v2's +0.11 over v1 is probably dev overfitting, and a rules entry is exactly the kind a judge might check for test leakage.</dd>
+<dt>Downsides</dt>
+<dd>2–3 hours of careful labelling, and your labels will differ somewhat from the frontier drafter's.</dd>
+</dl>
+</article>
+
+<article class="idea" id="i6">
+<h3>6. Pitch the judges: a launch-team digest</h3>
+<div class="chips"><span class="chip id">I6</span><span class="chip ax">Judging</span><span class="chip cf">Conf 60%</span><span class="chip cf">Complexity Medium</span></div>
+<dl class="fields">
+<dt>Description</dt>
+<dd>Present the output as what a launch team would actually read:
+  <ul>
+    <li>A weekly board with one card per event. Group the same news across sources, for example a press release and its news repost.</li>
+    <li>Actionable items first, each insight linked to its verbatim quote.</li>
+    <li>A measured cost per 100 items (laptop time plus watts).</li>
+    <li>A run recorded with the network unplugged, as proof it works offline.</li>
+  </ul></dd>
+<dt>Basis</dt>
+<dd><code>direct:</code> The README says judges weigh usefulness, privacy (network off) and cost per 100 items. Dev and test contain the same events from several sources: NW-0046 and NW-0057 (ADAURA), and NW-0052 and NW-0053 (J&amp;J Q2 2026). <code>reasoned:</code> If leaderboard scores cluster, these criteria decide the ranking.</dd>
+<dt>Rationale</dt>
+<dd>A rules-first design gives a very strong cost and privacy story: most items never touch a model. That differentiates you once scores are close.</dd>
+<dt>Downsides</dt>
+<dd>Demo time competes with scoring work, and the judging weights are unknown. Event grouping adds nothing to the composite.</dd>
+</dl>
+</article>
+</section>
+
+<div class="callout">
+  <div class="eyebrow">Unknowns that could flip the verdict</div>
+  <p>The event's length and prize; the judging weights; the organisers' hardware (it decides whether a 30B-class model is an option); and whether other teams will use frontier-labelled distillation, which is allowed but costs privacy points.</p>
+</div>
+
+<section id="rejection-summary">
+<h2>Rejection Summary</h2>
+<div class="tablewrap">
+<table>
+<thead><tr><th>#</th><th>Idea</th><th>Reason rejected</th></tr></thead>
+<tbody>
+<tr><td>R1</td><td>Distil frontier-model silver labels into a QLoRA small model</td><td>Allowed by the README, but it sends package data to a third party, against the "don't post publicly" request and the privacy judging. It needs cloud GPUs, and the expected gain over idea 4 is small.</td></tr>
+<tr><td>R2</td><td>Evidence-first PubMed: search only CONCLUSIONS sections</td><td>Basis refuted: gold spans are spread across conclusions 8, results 7, methods 3, background 2 and unstructured 11. Abstracts are short, so pass the whole text.</td></tr>
+<tr><td>R3</td><td>ctgov actionable "yes" for new AZ/J&amp;J phase 3 registrations</td><td>Refuted: dev ctgov is 10/10 "no", and there's no evidence for the sponsor rule. Folded into idea 1 as "keep no".</td></tr>
+<tr><td>R4</td><td>Title-only PubMed fallback</td><td>The rehydration risk is gone (0 mismatches on dev and test). Not worth building beyond a one-line guard.</td></tr>
+<tr><td>R5</td><td>Predict aspects first, derive the signal type from them</td><td>Signal type is mostly source-driven, and deriving it from aspects loses the none and expert_opinion cases.</td></tr>
+<tr><td>R6</td><td>No LLM at all: rules plus weak supervision / TF-IDF</td><td>PubMed is 104 test items and needs language understanding for aspects. Weak supervision adds effort for a gain of about ±0.01.</td></tr>
+<tr><td>R7</td><td>Self-consistency voting on polarity</td><td>Costs N times the compute, which hurts cost per 100 items. Polarity risk is driven by the QWK cliff and gold noise, not by model variance.</td></tr>
+<tr><td>R8</td><td>"Gold noise compresses the leaderboard" as a standalone idea</td><td>No data supports it. Kept only as a hedged part of the verdict.</td></tr>
+<tr><td>R9</td><td>Force a prediction for every signal class</td><td>Weak on its own, because forcing classes absent from gold adds errors. The useful part is folded into idea 2.</td></tr>
+<tr><td>R10</td><td>Cue-word lexicon as a standalone system</td><td>Duplicates and is fitted to dev. Folded into idea 4 as the precision triggers.</td></tr>
+<tr><td>R11</td><td>Cross-source event clustering for score</td><td>No metric rewards it. Folded into idea 6 as a usefulness feature.</td></tr>
+<tr><td>R12</td><td>fda_event reaction table built from the unlabeled vocabulary</td><td>Too small to stand alone. Folded into idea 1.</td></tr>
+<tr><td>R13</td><td>Press-release boilerplate stripping</td><td>Too small to stand alone. Folded into idea 3.</td></tr>
+<tr><td>R14</td><td>Hardware risk (4 GB VRAM)</td><td>Not a blocker: about 150 model-routed items run fine on a 3–4B Q4 model or with CPU offload. Kept as context, not an idea.</td></tr>
+</tbody>
+</table>
+</div>
+</section>
+
+<footer class="composition-signal">Composed 2026-11-07 by ce-ideate from the user prompt and the package at <code>/home/north/localdev/hack1984/drug track/</code>. Numbers were recomputed with the package's own <code>score.py</code> on dev (rehydrated text).</footer>
+</main>
+</body>
+</html>
