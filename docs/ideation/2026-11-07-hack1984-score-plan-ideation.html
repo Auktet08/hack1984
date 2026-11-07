@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ideation: HACK1984 Track 1 score plan</title>
+<style>
+:root {
+  --bg: #fbfaf7; --surface: #ffffff; --text: #1d1f23; --muted: #5a5f69; --line: #dedbd3;
+  --accent: #1f5f8b; --accent-soft: #e3eef6; --accent-text: #174a6d;
+  --good: #2f7a4b; --good-soft: #e4f2e8; --warn: #9a5b12; --warn-soft: #f8ecd9;
+  --bad: #a63d3d; --bad-soft: #f7e3e3; --bar: #3b7fb0; --bar2: #c98a2b; --grid: #e9e6df;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #15171b; --surface: #1d2025; --text: #e7e8ea; --muted: #a3a8b1; --line: #343842;
+    --accent: #7db6dc; --accent-soft: #1f3342; --accent-text: #a9d0ea;
+    --good: #7cc596; --good-soft: #1e3327; --warn: #e3b26b; --warn-soft: #3a2d1a;
+    --bad: #e08c8c; --bad-soft: #3a2224; --bar: #6aa8d6; --bar2: #e0a650; --grid: #2b2f37;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #15171b; --surface: #1d2025; --text: #e7e8ea; --muted: #a3a8b1; --line: #343842;
+  --accent: #7db6dc; --accent-soft: #1f3342; --accent-text: #a9d0ea;
+  --good: #7cc596; --good-soft: #1e3327; --warn: #e3b26b; --warn-soft: #3a2d1a;
+  --bad: #e08c8c; --bad-soft: #3a2224; --bar: #6aa8d6; --bar2: #e0a650; --grid: #2b2f37;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--text);
+  font: 16px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; }
+main { max-width: 900px; margin-inline: auto; padding: 32px 16px 64px; }
+p, li, dd { max-width: 72ch; }
+h1 { font-size: 1.75rem; line-height: 1.25; margin: 0.2em 0 0.3em; }
+h2 { font-size: 1.35rem; margin: 2.2em 0 0.6em; padding-bottom: 0.25em; border-bottom: 1px solid var(--line); }
+h3 { font-size: 1.12rem; margin: 0; }
+h4 { font-size: 0.95rem; margin: 1.4em 0 0.4em; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); }
+strong { color: inherit; }
+a { color: var(--accent); }
+code { font: 0.88em/1.4 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; background: var(--grid); padding: 0.05em 0.3em; border-radius: 4px; }
+.eyebrow { font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+.meta { display: flex; flex-wrap: wrap; gap: 6px 18px; font-size: 0.9rem; color: var(--muted); margin: 0.4em 0 1em; }
+.meta b { color: var(--text); font-weight: 600; }
+.lede { font-size: 1.05rem; }
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin: 1.4em 0; }
+.stat { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; }
+.stat .num { font-size: 1.5rem; font-weight: 700; line-height: 1.2; }
+.stat .lbl { font-size: 0.85rem; color: var(--muted); line-height: 1.35; margin-top: 4px; }
+table { border-collapse: collapse; width: 100%; font-size: 0.92rem; margin: 0.8em 0; }
+th, td { text-align: left; vertical-align: top; padding: 7px 9px; border-bottom: 1px solid var(--line); }
+th { font-weight: 600; background: var(--grid); }
+td.n { white-space: nowrap; font-variant-numeric: tabular-nums; }
+.callout { background: var(--accent-soft); color: var(--accent-text); border-radius: 10px; padding: 12px 16px; margin: 1.2em 0; }
+.callout p { margin: 0.3em 0; color: var(--text); }
+.callout .eyebrow { color: var(--accent-text); }
+.callout.warn { background: var(--warn-soft); }
+.callout.warn .eyebrow { color: var(--warn); }
+nav.jump ol { padding-left: 1.4em; margin: 0.4em 0 1.2em; }
+nav.jump li { margin: 0.15em 0; }
+article.idea { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 18px 20px; margin: 18px 0; }
+.idea-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px 12px; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; margin: 10px 0 4px; }
+.chip { font-size: 0.78rem; padding: 2px 9px; border-radius: 999px; border: 1px solid var(--line); background: var(--grid); color: var(--text); }
+.chip.id { background: var(--accent-soft); color: var(--accent-text); border-color: transparent; font-weight: 600; }
+.chip.conf { background: var(--good-soft); color: var(--good); border-color: transparent; }
+.chip.cx { background: var(--warn-soft); color: var(--warn); border-color: transparent; }
+dl.fields { margin: 10px 0 0; }
+dl.fields dt { font-size: 0.78rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); margin-top: 12px; font-weight: 600; }
+dl.fields dd { margin: 3px 0 0; }
+dl.fields dd ul { margin: 0.2em 0; padding-left: 1.2em; }
+figure { margin: 14px 0 6px; }
+figure svg { width: 100%; height: auto; display: block; }
+figcaption { font-size: 0.85rem; color: var(--muted); margin-top: 4px; max-width: 72ch; }
+svg text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif; fill: var(--text); }
+svg .muted { fill: var(--muted); }
+svg .bar { fill: var(--bar); }
+svg .bar2 { fill: var(--bar2); }
+svg .gridline { stroke: var(--grid); stroke-width: 1; }
+svg .axis { stroke: var(--muted); stroke-width: 1; }
+svg .box { fill: var(--surface); stroke: var(--line); stroke-width: 1.5; }
+svg .box-accent { fill: var(--accent-soft); stroke: var(--accent); stroke-width: 1.5; }
+svg .arrow { stroke: var(--muted); stroke-width: 1.5; fill: none; }
+svg .s1 { stroke: var(--bar); stroke-width: 2.5; fill: none; }
+svg .s2 { stroke: var(--bar2); stroke-width: 2.5; fill: none; stroke-dasharray: 6 4; }
+svg .d1 { fill: var(--bar); }
+svg .d2 { fill: var(--bar2); }
+svg .loss { fill: var(--bad-soft); }
+svg .zero { stroke: var(--bad); stroke-width: 1.2; }
+footer.composition-signal { margin-top: 48px; padding-top: 12px; border-top: 1px solid var(--line); font-size: 0.82rem; color: var(--muted); }
+@media (max-width: 560px) { article.idea { padding: 14px; } h1 { font-size: 1.45rem; } }
+</style>
+</head>
+<body>
+<main>
+
+<header>
+  <div class="eyebrow">Ideation · score plan</div>
+  <h1>Ideation: HACK1984 Track 1 score plan</h1>
+  <div class="meta">
+    <span><b>Date:</b> <time datetime="2026-11-07">2026-11-07</time></span>
+    <span><b>Topic:</b> hack1984-score-plan</span>
+    <span><b>Mode:</b> repo-grounded</span>
+  </div>
+  <p class="meta"><span><b>Focus:</b> help me win this hackathon described in problem.md. give me a high level overview of what we need to optimize the score in a reasonable amount of time. open to doing research, but help me understand what i'm researching</span></p>
+</header>
+
+<section id="summary">
+  <p class="lede">Rules alone score 0.843 on dev. Every point that's left sits in four places: aspects the rules miss, the shape of spans, the actionable call, and signal type. Each is worth about 1 to 3 points on test, and none of them shows up reliably on 60 dev items. So the first job is a scoreboard that can see a 1-point change. Then point the model at clauses, not sentences, and let it add an aspect whenever it's right more often than not.</p>
+  <div class="stats">
+    <div class="stat"><div class="num">0.843</div><div class="lbl">dev composite, rules L3 (E009), dev-fitted</div></div>
+    <div class="stat"><div class="num">±0.055</div><div class="lbl">dev 95% range: one change of 0.02 is invisible</div></div>
+    <div class="stat"><div class="num">+0.021–0.025</div><div class="lbl">a model finding half the missed aspects at 80% precision (dev simulation, clause spans)</div></div>
+    <div class="stat"><div class="num">≈0.4</div><div class="lbl">break-even precision for a new aspect; L3's is 1.0</div></div>
+    <div class="stat"><div class="num">0.40 → 0.67</div><div class="lbl">span F1: whole sentence vs best clause, on 46 dev gold aspects</div></div>
+  </div>
+</section>
+
+<section id="grounding-context">
+<h2>Codebase Context</h2>
+
+<h4>Where we are</h4>
+<p>It is Saturday 14:00 EST; everything is due Sunday 11:00. <code>src/rules/predict.py --level 3</code> scores 0.843 dev composite (signal 0.856, actionable 0.762, aspect F1 0.617, QWK 0.933, speaker 1.0, span 0.731, citation 1.0). Levels 2 and 3 were written after reading dev answers, so expect test to come in lower. No model has run, the Mac toolchain is untested and there are no teacher labels yet. Decisions in force (PROBLEM.md §0): at most 3B total parameters, Qwen3.5-2B first; frontier teacher labels on the 1,733 unlabeled items are allowed, never on test; rules keep the final say where they fire; self-consistency is rejected.</p>
+
+<h4>Where the dev points are</h4>
+<p>Each bar below replaces one part of the L3 output with the gold answer and reports the composite gain. These are ceilings, not forecasts. They show where to dig.</p>
+<figure>
+<svg viewBox="0 0 680 352" role="img" aria-labelledby="hr-title">
+  <title id="hr-title">Composite gain over L3 (0.843) if one lever or one source were perfect</title>
+  <text x="0" y="16" font-size="13" font-weight="600">By lever (all 60 dev items)</text>
+  <text x="0" y="46" font-size="12.5">Find the 31 missed aspects</text>
+  <rect class="bar" x="300" y="34" width="178" height="16" rx="3"/><text x="484" y="46" font-size="12.5">+0.063 (spans placed on gold)</text>
+  <text x="0" y="72" font-size="12.5">Exact spans on the 25 found aspects</text>
+  <rect class="bar" x="300" y="60" width="108" height="16" rx="3"/><text x="414" y="72" font-size="12.5">+0.038</text>
+  <text x="0" y="98" font-size="12.5">Actionable right on every item</text>
+  <rect class="bar" x="300" y="86" width="96" height="16" rx="3"/><text x="402" y="98" font-size="12.5">+0.034</text>
+  <text x="0" y="124" font-size="12.5">Signal type right on every item</text>
+  <rect class="bar" x="300" y="112" width="57" height="16" rx="3"/><text x="363" y="124" font-size="12.5">+0.020</text>
+  <text x="0" y="168" font-size="13" font-weight="600">By source (gold on every field for that source; dev / test items)</text>
+  <text x="0" y="198" font-size="12.5">PubMed (26 / 104)</text>
+  <rect class="bar2" x="300" y="186" width="323" height="16" rx="3"/><text x="629" y="198" font-size="12.5">+0.114</text>
+  <text x="0" y="224" font-size="12.5">News (5 / 30)</text>
+  <rect class="bar2" x="300" y="212" width="94" height="16" rx="3"/><text x="400" y="224" font-size="12.5">+0.033</text>
+  <text x="0" y="250" font-size="12.5">Press release (7 / 18)</text>
+  <rect class="bar2" x="300" y="238" width="91" height="16" rx="3"/><text x="397" y="250" font-size="12.5">+0.032</text>
+  <text x="0" y="276" font-size="12.5">fda_event (10 / 37), spans only</text>
+  <rect class="bar2" x="300" y="264" width="31" height="16" rx="3"/><text x="337" y="276" font-size="12.5">+0.011</text>
+  <text x="0" y="302" font-size="12.5">fda_label (2 / 10)</text>
+  <rect class="bar2" x="300" y="290" width="11" height="16" rx="3"/><text x="317" y="302" font-size="12.5">+0.004</text>
+  <text x="0" y="328" font-size="12.5">ctgov (10 / 40)</text>
+  <text x="300" y="328" font-size="12.5" class="muted">+0.000 (already perfect)</text>
+</svg>
+<figcaption>Dev only, measured with the package's own <code>score.py</code>. The levers overlap, so the gains don't add. L3 currently predicts no false-positive aspect at all: 25 of 56 gold aspects found, 0 extra.</figcaption>
+</figure>
+
+<p>Other measured facts the ideas lean on:</p>
+<ul>
+  <li><strong>Missed aspects:</strong> PubMed efficacy 10 (mostly +1), PubMed safety 6 (mostly −1), press efficacy 3, press safety 2, press convenience 2, news efficacy 2, the rest single items. Most have no cue word the rules know.</li>
+  <li><strong>Signal errors (8):</strong> 4 are PubMed items gold calls <code>none</code> that L3 calls efficacy: a case report on another condition, a tumour-board case, a prognostic model and a screen for another drug.</li>
+  <li><strong>Actionable errors (5):</strong> 4 are missed "yes": VTE prevention with amivantamab, dermatologic management with amivantamab-lazertinib, a real-world frontline study and ADAURA 8-year OS. 1 false "yes".</li>
+  <li><strong>Span shape:</strong> matched PubMed spans score 0.638 against fda_event's 0.811. On the 46 gold aspects in PubMed, news, press and fda_label, the whole containing sentence scores 0.395 span F1, the best clause 0.625, and the best clause cut to 14 words 0.673. Gold press-release spans sit in 76–123-word "sentences" because the headline and navigation text has no full stops.</li>
+  <li><strong>The scorer and extra aspects:</strong> <code>score.py</code> scores polarity, speaker and span only where gold and prediction both have the aspect (lines 88–96). An aspect gold leaves empty costs only aspect-F1 precision. The lesson doc's line "a wrong extra aspect can hurt up to four parts" holds only for a matched aspect with the wrong polarity or span.</li>
+  <li><strong>Test is not shaped like dev:</strong> test has 30 news items against dev's 5, 10 fda_label against 2, and 1 fda_notice against none. 45 of 60 dev labels were drafted by a frontier model under the guide, then corrected by reviewer rulings.</li>
+</ul>
+
+<h4>Past learnings</h4>
+<p><code>docs/solutions/best-practices/composite-scorer-qwk-cliff-and-matched-only-metrics.md</code>: the QWK cliff (1.0 with no variation, 0 after one disagreement), never submit zero aspects (0.167), and macro-F1 averages only classes present in gold, so each rare class is worth about 1/63 of the composite. Its "favour precision" advice is right for polarity and spans on matched aspects, but too strict for deciding whether to emit an aspect at all (idea 2).</p>
+
+<h4 id="research">What you're researching, and what you aren't</h4>
+<p>"Research" here means three different things, and they're worth very different amounts of score.</p>
+<table>
+  <thead><tr><th>Kind</th><th>Questions</th><th>What the answer decides</th><th>Status</th></tr></thead>
+  <tbody>
+    <tr><td><strong>1. Measure our own data</strong> (most of the value)</td><td>How close does the teacher get to dev gold? How do the dev-fitted rules do on silver labels? How precise must an added aspect be? Do sentence or clause spans match gold better?</td><td>The model path's ceiling, the gate threshold, the span design, and which rules to trust on test</td><td>Headroom, break-even and span-unit numbers measured this run. Teacher-on-dev and rules-on-silver need the teacher run (idea 1)</td></tr>
+    <tr><td><strong>2. Hands-on checks on the Mac</strong></td><td>Do mlx-lm and llama.cpp load Qwen3.5-2B? JSON-schema decoding, thinking off, LoRA on the hybrid layers, tokens per second</td><td>Whether the 2B path is real today or the fallback model takes over</td><td>Support confirmed in the source code (mlx-lm has a <code>qwen3_5</code> model, llama.cpp a <code>qwen35</code> architecture). Versions, JSON decoding and speed still need the Mac: idea 4, runbook in <code>drug track/MAC_CHECK.md</code></td></tr>
+    <tr><td><strong>3. Web research that feeds the score</strong> (Tavily/Exa)</td><td>Rival EGFR drugs, HTA and payer bodies, guideline bodies, trial name → product</td><td>Rare signal classes in news and press releases. Also the Tavily/Exa bonus and the pitch</td><td>Not done. Idea 6, logged in <code>research/ledger.jsonl</code></td></tr>
+  </tbody>
+</table>
+<p><strong>Already looked up this run</strong> (web search only, about 11 searches, value low to moderate):</p>
+<ul>
+  <li>A small-model extraction benchmark puts Qwen3.5-2B level with a 2B Granite. IFEval figures disagree across sources.</li>
+  <li>Small Qwen3.5 models default to thinking off, but one report says some llama.cpp builds ignore the flag.</li>
+  <li>Fine-tuned encoders usually beat small LLMs at classification with a few thousand labels.</li>
+  <li>Picking a span by ID can't produce a non-verbatim quote.</li>
+  <li>Constrained yes/no token probabilities are better calibrated than asking the model for a confidence.</li>
+  <li>Retrieved few-shot examples beat fixed ones, though the evidence for small models is thin.</li>
+  <li>The web search found nothing confirming Qwen3.5 support in mlx-lm or llama.cpp. A follow-up look at the source code did: mlx-lm has <code>mlx_lm/models/qwen3_5.py</code> (it loads the text model and drops the vision weights), llama.cpp lists a <code>qwen35</code> architecture, and ready GGUFs exist (<code>unsloth/Qwen3.5-2B-GGUF</code>).</li>
+</ul>
+<p>More benchmark reading won't settle the model choice; a run on the Mac will.</p>
+<p><strong>Not worth researching:</strong> anything about test items (ground rules), the full articles behind news snippets (gold spans come from the snippet), and medical facts (the guide says to label what the text says).</p>
+</section>
+
+<section id="topic-axes">
+<h2>Topic Axes</h2>
+<ol type="A">
+  <li>Scoreboard: how decisions get made (dev noise, silver hold-out, teacher calibration)</li>
+  <li>Aspect recall on PubMed, news and press (the model's job)</li>
+  <li>Span shape (on aspects already found, and on any new ones)</li>
+  <li>Item calls: signal type and actionable, including rare classes and the test mix</li>
+  <li>Model path on the Mac: toolchain, distillation, time</li>
+</ol>
+</section>
+
+<section id="ranked-ideas">
+<h2>Ranked Ideas</h2>
+<nav class="jump" aria-label="Ranked ideas">
+  <ol>
+    <li><a href="#i1">Run the teacher first: score it on dev, then build a silver scoreboard</a></li>
+    <li><a href="#i2">Point the 2B at clauses, and add aspects above about 60% precision</a></li>
+    <li><a href="#i3">Fit the span trimmer to silver spans, and split press releases properly</a></li>
+    <li><a href="#i4">Check the Mac toolchain (20–30 minutes); LoRA only overnight</a></li>
+    <li><a href="#i5">Fix the actionable misses and PubMed "none" items</a></li>
+    <li><a href="#i6">Build the knowledge pack for rare signal classes in news and press</a></li>
+  </ol>
+</nav>
+
+<article class="idea" id="i1">
+  <div class="idea-head"><span class="chip id">I1</span><h3>1. Run the teacher first: score it on dev, then build a silver scoreboard</h3></div>
+  <div class="chips"><span class="chip">Axis A · Scoreboard</span><span class="chip conf">Confidence 85%</span><span class="chip cx">Complexity Low–Medium (~2 h plus the API run)</span></div>
+  <dl class="fields">
+    <dt>Description</dt>
+    <dd>Make the teacher run the first thing that happens, not milestone M4 at 21:00.
+      <ul>
+        <li>Prompt the frontier teacher with the full guide and rulings plus same-source dev examples (never the item's own label). Run it on the 60 dev items and log its composite as a row. That number is the realistic ceiling for anything distilled from it, and a go/no-go for the model path.</li>
+        <li>Dedupe unlabeled against test (9 fda_event texts appear in both), then label the rest.</li>
+        <li>Hold out 300–400 silver items sampled to the test source mix.</li>
+        <li>One script scores any predictor on dev, the 15 human-reviewed items and the silver hold-out, prints the change with a bootstrap range, and appends the log row.</li>
+        <li>First use: run L2 and L3 on silver and see which dev-fitted rules hold up.</li>
+      </ul>
+    </dd>
+    <dt>Basis</dt>
+    <dd><strong>direct:</strong> README: "On the rest, a frontier model drafted the labels and we applied the reviewers' rulings" (45 of 60). The log header gives dev's 95% range as ±0.055, while every lever in this doc is worth +0.01 to +0.03, so dev alone can't rank them. PROBLEM §4.3: "Calibrate on dev first." DATA §8: 9 test fda_event texts also appear in unlabeled. Log E006 calls level 2 the "biggest single gain. Dev-fitted."</dd>
+    <dt>Rationale</dt>
+    <dd>Every other idea here needs these labels. The gate threshold (2), span tuning (3), the actionable and rare-class rules (5, 6) and any LoRA data (4) all read silver. If the teacher itself only gets about 0.88 on dev, a 2B copying it has little room over 0.843, and the hours should go to spans, item calls and the demo instead.</dd>
+    <dt>Downsides</dt>
+    <dd>Silver agrees with the drafter's habits, which is mostly what gold is too, so silver gains will overstate true quality. Use it to rank changes, not as truth. It costs API spend and a careful prompt (T3 can run it with North reviewing). It is already in the plan as M4. The change is to make it the first step and to use the dev score as a gate.</dd>
+  </dl>
+  <figure>
+    <svg viewBox="0 0 680 248" role="img" aria-labelledby="hub-title">
+      <title id="hub-title">One teacher run feeds every later decision</title>
+      <defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--muted)"/></marker></defs>
+      <rect class="box" x="4" y="92" width="168" height="64" rx="8"/>
+      <text x="88" y="116" font-size="12.5" text-anchor="middle" font-weight="600">Teacher on dev (60)</text>
+      <text x="88" y="134" font-size="11.5" text-anchor="middle" class="muted">score = ceiling,</text>
+      <text x="88" y="149" font-size="11.5" text-anchor="middle" class="muted">go/no-go for the model</text>
+      <line class="arrow" x1="174" y1="124" x2="218" y2="124" marker-end="url(#ah)"/>
+      <rect class="box-accent" x="222" y="92" width="196" height="64" rx="8"/>
+      <text x="320" y="116" font-size="12.5" text-anchor="middle" font-weight="600">Teacher labels</text>
+      <text x="320" y="134" font-size="11.5" text-anchor="middle">1,733 unlabeled items,</text>
+      <text x="320" y="149" font-size="11.5" text-anchor="middle">deduped against test</text>
+      <line class="arrow" x1="420" y1="124" x2="462" y2="25" marker-end="url(#ah)"/>
+      <line class="arrow" x1="420" y1="124" x2="462" y2="74" marker-end="url(#ah)"/>
+      <line class="arrow" x1="420" y1="124" x2="462" y2="124" marker-end="url(#ah)"/>
+      <line class="arrow" x1="420" y1="124" x2="462" y2="174" marker-end="url(#ah)"/>
+      <line class="arrow" x1="420" y1="124" x2="462" y2="223" marker-end="url(#ah)"/>
+      <rect class="box" x="466" y="8" width="210" height="34" rx="6"/><text x="476" y="30" font-size="12">Scoreboard + rules audit (I1)</text>
+      <rect class="box" x="466" y="57" width="210" height="34" rx="6"/><text x="476" y="79" font-size="12">Aspect gate threshold (I2)</text>
+      <rect class="box" x="466" y="107" width="210" height="34" rx="6"/><text x="476" y="129" font-size="12">Span trimmer tuning (I3)</text>
+      <rect class="box" x="466" y="157" width="210" height="34" rx="6"/><text x="476" y="179" font-size="12">Item-call rules (I5, I6)</text>
+      <rect class="box" x="466" y="206" width="210" height="34" rx="6"/><text x="476" y="228" font-size="12">Few-shot + LoRA data (I2, I4)</text>
+    </svg>
+    <figcaption>Why the teacher run sits on the critical path: it is the only source of a scoreboard larger than 60 items.</figcaption>
+  </figure>
+</article>
+
+<article class="idea" id="i2">
+  <div class="idea-head"><span class="chip id">I2</span><h3>2. Point the 2B at clauses, and add aspects above about 60% precision</h3></div>
+  <div class="chips"><span class="chip">Axis B · Aspect recall</span><span class="chip conf">Confidence 55%</span><span class="chip cx">Complexity Medium (~4–6 h)</span></div>
+  <dl class="fields">
+    <dt>Description</dt>
+    <dd>The model's job is to find the aspects the rules miss on PubMed, news and press items.
+      <ul>
+        <li><strong>Candidates:</strong> the normalizer splits each item into sentences, then clauses (on <code>;</code>, <code>:</code>, commas and "but / while / whereas"). Press releases split by headline and first paragraphs. Code numbers the clauses.</li>
+        <li><strong>Model output:</strong> under a JSON grammar, the 2B returns <code>{candidate_id, aspect, polarity}</code> entries or nothing. It never writes span text, so code quotes the clause verbatim and citation validity stays at 1.0.</li>
+        <li><strong>Gate:</strong> the probability of the constrained choice is the gate score. Emit an aspect when its estimated precision on silver is above about 0.6, and tune the exact cut on composite.</li>
+        <li><strong>Prompt:</strong> the guide section for that source. Once the toolchain works, add 2–3 retrieved same-source silver examples.</li>
+        <li><strong>Fallback:</strong> where the model returns nothing parseable, keep L3's output.</li>
+      </ul>
+      This also answers PROBLEM §13 Q1 (how strict the gate should be) and Q2 (point at clauses, not sentences).</dd>
+    <dt>Basis</dt>
+    <dd><strong>direct:</strong> On dev, the whole containing sentence scores 0.395 span F1 against gold and the best clause cut to 14 words scores 0.673 (46 gold aspects, measured this run). The pointing unit roughly decides whether added aspects help or hurt.
+      <p>Rerun of the break-even with those clause spans: a model that recovers half the 31 missed aspects gains +0.030 at precision 1.0, +0.025 at 0.8, +0.017 at 0.6, +0.012 at 0.5, +0.006 at 0.4 and −0.004 at 0.3, with 80% of polarities exact.</p>
+      <p>Why it's that low: <code>score.py</code> lines 88–96 only score polarity, speaker and span on matched aspects, so an extra aspect where gold is empty costs aspect-F1 precision and nothing else.</p>
+      <p><strong>external:</strong> the web research found that ID-based selection can't produce non-verbatim spans, and that constrained-token probabilities are better calibrated than a confidence the model states (thin evidence).</p></dd>
+    <dt>Rationale</dt>
+    <dd>L3 runs at precision 1.0 with recall 0.45, which is stricter than the composite rewards. Recall matters about as much as precision here: at 0.8 precision, going from a quarter to half of the missed aspects takes the gain from +0.014 to +0.025. Turning the 2B's task into a choice among short, gold-shaped options plays to what small models do reliably.</dd>
+    <dt>Downsides</dt>
+    <dd>The realistic gain is about +0.01 to +0.025 on dev, close to the noise floor, so it can only be judged on silver (I1). The 0.673 figure assumes the model picks the best clause. Picking a neighbouring clause scores lower. Abstracts have odd punctuation, and a gold phrase that straddles two clauses only matches in part. It depends on I4 passing. The lesson doc's "favour precision" line should be corrected so nobody re-tightens the gate.</dd>
+  </dl>
+  <figure>
+    <svg viewBox="0 0 680 268" role="img" aria-labelledby="be-title">
+      <title id="be-title">Composite change from adding aspects, by the precision of the added aspects</title>
+      <rect class="loss" x="60" y="175.5" width="560" height="44.5"/>
+      <line class="gridline" x1="60" y1="42.2" x2="620" y2="42.2"/>
+      <line class="gridline" x1="60" y1="86.7" x2="620" y2="86.7"/>
+      <line class="gridline" x1="60" y1="131.1" x2="620" y2="131.1"/>
+      <line class="zero" x1="60" y1="175.5" x2="620" y2="175.5"/>
+      <text x="52" y="46" font-size="11.5" text-anchor="end" class="muted">+0.03</text>
+      <text x="52" y="90.5" font-size="11.5" text-anchor="end" class="muted">+0.02</text>
+      <text x="52" y="135" font-size="11.5" text-anchor="end" class="muted">+0.01</text>
+      <text x="52" y="179.5" font-size="11.5" text-anchor="end" class="muted">0</text>
+      <text x="52" y="223" font-size="11.5" text-anchor="end" class="muted">−0.01</text>
+      <polyline class="s1" points="60,193.3 140,148.9 220,122.2 300,100 460,64.4 620,42.2"/>
+      <polyline class="s2" points="60,206.7 140,166.7 220,135.5 300,113.3 460,82.2 620,60"/>
+      <circle class="d1" cx="60" cy="193.3" r="3.5"/><circle class="d1" cx="140" cy="148.9" r="3.5"/><circle class="d1" cx="220" cy="122.2" r="3.5"/><circle class="d1" cx="300" cy="100" r="3.5"/><circle class="d1" cx="460" cy="64.4" r="3.5"/><circle class="d1" cx="620" cy="42.2" r="3.5"/>
+      <circle class="d2" cx="60" cy="206.7" r="3.5"/><circle class="d2" cx="140" cy="166.7" r="3.5"/><circle class="d2" cx="220" cy="135.5" r="3.5"/><circle class="d2" cx="300" cy="113.3" r="3.5"/><circle class="d2" cx="460" cy="82.2" r="3.5"/><circle class="d2" cx="620" cy="60" r="3.5"/>
+      <text x="150" y="203" font-size="11.5" class="muted">below ≈0.4, added aspects cost points</text>
+      <line class="s1" x1="430" y1="201" x2="456" y2="201"/><text x="462" y="205" font-size="11.5">80% of polarities exact</text>
+      <line class="s2" x1="430" y1="216" x2="456" y2="216"/><text x="462" y="220" font-size="11.5">60% exact</text>
+      <line class="axis" x1="60" y1="220" x2="620" y2="220"/>
+      <text x="60" y="238" font-size="11.5" text-anchor="middle">0.3</text>
+      <text x="140" y="238" font-size="11.5" text-anchor="middle">0.4</text>
+      <text x="220" y="238" font-size="11.5" text-anchor="middle">0.5</text>
+      <text x="300" y="238" font-size="11.5" text-anchor="middle">0.6</text>
+      <text x="460" y="238" font-size="11.5" text-anchor="middle">0.8</text>
+      <text x="620" y="238" font-size="11.5" text-anchor="middle">1.0</text>
+      <text x="340" y="258" font-size="12" text-anchor="middle" class="muted">precision of the aspects the model adds (it recovers half of the 31 missed)</text>
+    </svg>
+    <figcaption>Dev simulation on top of L3, 40 random draws per point, spans taken from the best clause, not the gold position. The curve flattens fast above 0.6. Going from 0.8 to 1.0 precision is worth less than going from a quarter to half recall.</figcaption>
+  </figure>
+</article>
+
+<article class="idea" id="i3">
+  <div class="idea-head"><span class="chip id">I3</span><h3>3. Fit the span trimmer to silver spans, and split press releases properly</h3></div>
+  <div class="chips"><span class="chip">Axis C · Span shape</span><span class="chip conf">Confidence 65%</span><span class="chip cx">Complexity Low–Medium (~2–3 h)</span></div>
+  <dl class="fields">
+    <dt>Description</dt>
+    <dd>Choose the trimming rule against hundreds of teacher spans instead of 13 dev ones, then confirm on dev. The rule covers which boundaries cut a clause, the maximum length, and whether to keep subject, verb and cue. Apply it to the rule cues (whose spans are often 2–4 words against gold's 7–12) and to I2's candidates. Separately, split press releases into headline, subheads and bullets, so a "sentence" is no longer 100 words of navigation text.</dd>
+    <dt>Basis</dt>
+    <dd><strong>direct:</strong> An oracle span on the 25 aspects L3 already finds is worth +0.038, the largest single lever after missed aspects. Matched PubMed spans score 0.638 against fda_event's 0.811: L3's "manageable safety" (2 words) and "retrospectively analyzed" (2 words) are shorter than gold. Gold press-release spans sit in 76–123-word stretches without full stops (NW-0007, NW-0031, NW-0046). Log E008 widened spans to 16 words and span F1 fell from 0.731 to 0.629, so the length has to be fitted, not guessed.</dd>
+    <dt>Rationale</dt>
+    <dd>It needs no model and no Mac, so North can do it while the toolchain check and teacher run are going. It improves the rules-only submission (the safety net) and I2's candidates at the same time.</dd>
+    <dt>Downsides</dt>
+    <dd>Teacher spans may be a little longer or shorter than the drafter's, so check the human-reviewed 15 too. Expect +0.005 to +0.015, invisible on dev alone. Press releases are only 18 test items.</dd>
+  </dl>
+  <figure>
+    <svg viewBox="0 0 680 150" role="img" aria-labelledby="sp-title">
+      <title id="sp-title">Span F1 against gold by the unit a span is cut from</title>
+      <text x="0" y="22" font-size="12.5">Whole sentence containing the claim</text>
+      <rect class="bar" x="300" y="10" width="142" height="16" rx="3"/><text x="448" y="22" font-size="12.5">0.395</text>
+      <text x="0" y="52" font-size="12.5">Best clause, any length</text>
+      <rect class="bar" x="300" y="40" width="225" height="16" rx="3"/><text x="531" y="52" font-size="12.5">0.625</text>
+      <text x="0" y="82" font-size="12.5">Best clause, cut to 14 words</text>
+      <rect class="bar" x="300" y="70" width="242" height="16" rx="3"/><text x="548" y="82" font-size="12.5">0.673</text>
+      <text x="0" y="112" font-size="12.5">L3 cue spans (15 found on these sources)</text>
+      <rect class="bar2" x="300" y="100" width="244" height="16" rx="3"/><text x="550" y="112" font-size="12.5">0.677</text>
+      <line class="axis" x1="300" y1="128" x2="660" y2="128"/>
+      <text x="300" y="144" font-size="11" class="muted">0</text><text x="660" y="144" font-size="11" text-anchor="end" class="muted">1.0</text>
+    </svg>
+    <figcaption>Dev, the 46 gold aspects on PubMed, news, press and fda_label (L3 row: the 15 of them it finds). A trimmer tuned on silver should move the clause rows up. The sentence row shows why sentence pointers alone would cost points.</figcaption>
+  </figure>
+</article>
+
+<article class="idea" id="i4">
+  <div class="idea-head"><span class="chip id">I4</span><h3>4. Check the Mac toolchain (20–30 minutes); LoRA only overnight</h3></div>
+  <div class="chips"><span class="chip">Axis E · Model path</span><span class="chip conf">Confidence 85%</span><span class="chip cx">Complexity Low (20–30 min, then overnight)</span></div>
+  <dl class="fields">
+    <dt>Description</dt>
+    <dd>Before anyone writes model code, check on the Mac that:
+      <ul>
+        <li>mlx-lm and llama.cpp both load Qwen3.5-2B;</li>
+        <li>decoding under a JSON schema or grammar works;</li>
+        <li>thinking stays off (check the chat template, not just the flag);</li>
+        <li>a 10-step LoRA runs (mlx-lm's default already covers every linear layer in a block, including the hybrid layers' <code>in_proj_*</code> and <code>out_proj</code>);</li>
+        <li>and record tokens per second.</li>
+      </ul>
+      Pin the versions that work. If either runtime fails, switch to the fallback the plan already names (Qwen2.5-3B or Llama-3.2-3B). LoRA on silver runs only overnight behind the G2 gate, and never blocks the daytime path. This answers §13 Q3. The copy-paste runbook for whoever has the Mac is <code>drug track/MAC_CHECK.md</code>.</dd>
+    <dt>Basis</dt>
+    <dd><strong>external:</strong> The web search couldn't confirm support, but the source code does. mlx-lm has <code>mlx_lm/models/qwen3_5.py</code> with the Gated DeltaNet layers. llama.cpp's architecture list includes <code>qwen35</code>. <code>unsloth/Qwen3.5-2B-GGUF</code> has Q4 to Q8 files. The model is published as image+text, and mlx-lm loads only the text part.<p>One report says <code>enable_thinking:false</code> is ignored in some llama.cpp builds. The community warning that q/k/v/o-only LoRA misses the hybrid layers applies to other trainers: mlx-lm's LoRA defaults to every linear layer in a block. No source gives a clean "LoRA pays off after N examples" figure.</p><p><strong>direct:</strong> PROBLEM §4.2 already names the fallback models and §10 the G2 gate.</p></dd>
+    <dt>Rationale</dt>
+    <dd>Support exists in the source code, but versions, JSON decoding and speed on this particular Mac are still unknown. Speed decides I2's cost per item and whether labeling about 2,000 items overnight fits. The check costs 20–30 minutes of someone else's time. Keeping LoRA overnight puts the uncertain bet on idle Mac time instead of daytime hours.</dd>
+    <dt>Downsides</dt>
+    <dd>If the fallback model is needed, prompt work starts on a different model. A model bake-off was considered and dropped: the evidence can't separate the candidates, and the fallbacks are already chosen.</dd>
+  </dl>
+</article>
+
+<article class="idea" id="i5">
+  <div class="idea-head"><span class="chip id">I5</span><h3>5. Fix the actionable misses and PubMed "none" items</h3></div>
+  <div class="chips"><span class="chip">Axis D · Item calls</span><span class="chip conf">Confidence 55%</span><span class="chip cx">Complexity Low–Medium (~2 h)</span></div>
+  <dl class="fields">
+    <dt>Description</dt>
+    <dd><strong>Actionable:</strong> a prior by source and signal, plus a model "yes" on PubMed and news items that change practice for our own products: pivotal or long-term results, and studies on managing our drug's toxicities. <strong>PubMed "none":</strong> when the abstract's subject is another drug, a prognostic model or an unrelated condition, output signal none with no aspects. Add one question to the 2B's prompt: is osimertinib, amivantamab or lazertinib the subject? Check both fixes on silver before keeping them.</dd>
+    <dt>Basis</dt>
+    <dd><strong>direct:</strong> On dev, 4 of 5 actionable errors are missed "yes" (PM-0005 VTE management with amivantamab, PM-0050 dermatologic management, PM-0022 real-world frontline, NW-0057 ADAURA 8-year OS). An oracle actionable is worth +0.034, the largest item-level lever. 4 of 8 signal errors are PubMed items gold calls none (PM-0028, PM-0035, PM-0064, PM-0090). An oracle signal is worth +0.020. Actionable F1 counts only the "yes" class, so each recovered "yes" counts heavily.</dd>
+    <dt>Rationale</dt>
+    <dd>Both are judgement calls the rules can't make from titles, and both fit naturally as extra fields in I2's single call. Together they're worth more than any one rare-class fix.</dd>
+    <dt>Downsides</dt>
+    <dd>Rules fitted to four dev items overfit easily. PM-0005 and PM-0050 have ordinary-looking titles, so a title rule won't find them. A partial fix is worth about +0.01, inside dev noise, so only silver can confirm it.</dd>
+  </dl>
+</article>
+
+<article class="idea" id="i6">
+  <div class="idea-head"><span class="chip id">I6</span><h3>6. Build the knowledge pack for rare signal classes in news and press</h3></div>
+  <div class="chips"><span class="chip">Axis D · Item calls</span><span class="chip conf">Confidence 50%</span><span class="chip cx">Complexity Medium (~3 h, T3)</span></div>
+  <dl class="fields">
+    <dt>Description</dt>
+    <dd>Use Tavily and Exa at build time to collect the lists that L2's title cues are missing:
+      <ul>
+        <li>rival EGFR and NSCLC drugs and their sponsors;</li>
+        <li>HTA and payer bodies by country (NICE, HAS, CADTH, PBS, G-BA, IQWiG and others);</li>
+        <li>guideline bodies;</li>
+        <li>trial name → product.</li>
+      </ul>
+      Feed them to rules for competitor_move (a rival leads the headline), access_pricing (a payer or HTA body acts), guideline and regulatory. Save every result to disk and log it in the ledger. No item text goes into a query.</dd>
+    <dt>Basis</dt>
+    <dd><strong>direct:</strong> Test has 30 news items to dev's 5. DATA §3.6 expects competitor_move and access_pricing there, and dev has one example of each. Macro-F1 averages over the classes present in gold, so each rare class is about 1/9 of signal F1, or 1/63 of the composite. RESEARCH_README §1 already budgets this knowledge pack.</dd>
+    <dt>Rationale</dt>
+    <dd>This is the research that moves the leaderboard, not just the bonus. The same lists also group cards by event and supply cited facts for the pitch.</dd>
+    <dt>Downsides</dt>
+    <dd>The gain depends on the rare classes appearing in test and on titles carrying the cue, and dev can't show either. Check on silver. It takes T3's time from the pitch. Cue lists can misfire on press releases that name rivals in passing (log E007 saw the same with aspect cues).</dd>
+  </dl>
+</article>
+</section>
+
+<section id="rejection-summary">
+<h2>Rejection Summary</h2>
+<table>
+  <thead><tr><th>#</th><th>Idea</th><th>Reason rejected</th></tr></thead>
+  <tbody>
+    <tr><td>R1</td><td>Gate aspects at 0.5 precision</td><td>The first simulation placed spans on the gold position. Rerun with real clause spans, the break-even rose to ≈0.35–0.4, so the target moved to ≈0.6 (folded into I2).</td></tr>
+    <tr><td>R2</td><td>Sentence-number pointers (PROBLEM §4.1.4 as written)</td><td>The whole sentence scores 0.395 span F1 against 0.673 for the best clause. Replaced by clause pointers in I2.</td></tr>
+    <tr><td>R3</td><td>Per-sentence × aspect scoring with a cached item prefix</td><td>A speed trick for I2 with a reasoned-only basis. Merged.</td></tr>
+    <tr><td>R4</td><td>Audit the dev-fitted rules on silver (standalone)</td><td>It audits against the teacher, not gold, so it's a robustness check rather than a lift. Folded into I1 as the scoreboard's first use.</td></tr>
+    <tr><td>R5</td><td>Mine the teacher's spans into a cue lexicon</td><td>Duplicates I2's recall job and copies teacher bias into rules. Worth revisiting only if the Mac path fails.</td></tr>
+    <tr><td>R6</td><td>Retrieved few-shot examples from silver (standalone)</td><td>Optimises a model path that doesn't run yet, on thin evidence. Kept as an option inside I2.</td></tr>
+    <tr><td>R7</td><td>Encoder heads (ModernBERT/DeBERTa) on the 3050 Ti</td><td>Signal and actionable oracles are only +0.020 and +0.034, so a silver-trained encoder gains less. It's a second training track in 21 hours, and it's unclear whether it counts toward the 3B limit. Cut, as §13 Q4 proposed.</td></tr>
+    <tr><td>R8</td><td>Polarity correction table fitted on silver</td><td>Reasoned-only, and it needs student labels that won't exist until late Saturday.</td></tr>
+    <tr><td>R9</td><td>Bake off Qwen3.5-2B against the 3B fallbacks</td><td>The evidence can't separate them, and the fallbacks are already chosen. Hours spent for no expected gain.</td></tr>
+    <tr><td>R10</td><td>"Zero-parameter ship" bundle</td><td>The same as I1's audit plus I3. No separate idea.</td></tr>
+    <tr><td>R11</td><td>Extra QWK-cliff hedge</td><td>Already in L3: QWK is 0.933 and matched polarities are varied (E009, E010).</td></tr>
+    <tr><td>R12</td><td>fda_event span = first 3 reactions</td><td>0.82 against 0.81 span F1 (DATA §3.2). Noise.</td></tr>
+    <tr><td>R13</td><td>Model judgement for fda_label "cosmetic vs clinical"</td><td>Dev oracle +0.004 on 2 items. Too small to plan around; I2's prompt can cover it.</td></tr>
+    <tr><td>R14</td><td>Quote attribution for news speakers</td><td>Dev news speaker is "media" 4 of 4, and few snippets quote anyone.</td></tr>
+    <tr><td>R15</td><td>Hand-label 100 unlabeled items</td><td>Superseded: teacher labels are now allowed and far cheaper per item.</td></tr>
+    <tr><td>R16</td><td>Self-consistency voting on polarity</td><td>Rejected in PROBLEM.md decisions in force.</td></tr>
+    <tr><td>R17</td><td>Ask the organisers about encoders and transcript format</td><td>Not a score lever. Already PROBLEM §13 Q6 and Q8.</td></tr>
+    <tr><td>–</td><td>Gap: transcripts, demo and pitch</td><td>Out of scope here. They're judged separately from the leaderboard composite, and no idea here tests transcript-style input. PROBLEM §2 and §8 cover them.</td></tr>
+  </tbody>
+</table>
+</section>
+
+<footer class="composition-signal">Composed <time datetime="2026-11-07T19:30Z">2026-11-07 14:30 EST</time> by ce-ideate from the user prompt, <code>drug track/PROBLEM.md</code>, <code>drug track/DATA.md</code>, <code>docs/experiments/log.md</code> and new dev measurements (headroom oracles, break-even simulation, clause-span check) run with the package's <code>score.py</code>.</footer>
+</main>
+</body>
+</html>

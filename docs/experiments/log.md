@@ -36,6 +36,8 @@ Verdicts:
 | E014 | 2026-11-07 | B2 = B1 + pubmed/news/PR → efficacy, PR → actionable yes | 0.710 | — | 0.33 | 0.53 | 0.30 | 1.000 | 0.81 | superseded | Equivalent to E005. |
 | E015 | 2026-11-07 | O1 oracle: gold on ctgov/fda_event only | 0.648 | — | 0.23 | 0.00 | 0.30 | 1.000 | 1.00 | info | Perfect rules on those sources alone cap at ~0.65. |
 | E016 | 2026-11-07 | O2 oracle: gold everywhere | 1.000 | — | 1 | 1 | 1 | 1 | 1 | info | Sanity check of the scorer. |
+| E017 | 2026-11-07 | Oracle headroom: L3 + all 31 missed aspects, gold polarity, 12-word spans centred on gold | 0.904 | 0.916 | 0.856 | 0.762 | 1.000 | 0.967 | 0.747 | info | Upper bound (span position from gold). Other dev oracles on L3: actionable +0.034, spans on matched +0.038, signal +0.020; PubMed full oracle +0.114. L3 has 0 false-positive aspects. See docs/ideation/2026-11-07-hack1984-score-plan-ideation.html. |
+| E018 | 2026-11-07 | Simulated model on L3: recovers 50% of missed aspects at precision 0.8, best-clause spans ≤14w, 80% polarity exact (seed 0) | 0.870 | — | 0.856 | 0.762 | 0.812 | 0.928 | 0.731 | info | Mean over 40 seeds +0.025. Break-even precision ≈0.35–0.4 (p=0.5 +0.012, p=0.3 −0.004): an aspect gold leaves null costs only aspect-F1 precision. Span F1 on 46 gold aspects: whole sentence 0.395 vs best clause ≤14w 0.673. |
 <!-- new rows above this line -->
 
 ## Ideas already considered and rejected (not run)
