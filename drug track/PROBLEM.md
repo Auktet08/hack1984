@@ -61,6 +61,11 @@ North's laptop has an RTX 3050 Ti with 4 GB.
    leaderboard instead: the network-off transcript run, citations, the demo, usefulness, cost per 100 items and the
    startup. One model path, built for transcripts first. **Cut:** LoRA, the score-tuning experiments, and (proposed,
    to confirm) teacher labels. Details: `../docs/ideation/2026-11-07-lean-plan.md`.
+9. **Gemini Flash stands in for the local model on the startup side** (North, Sat evening) until the trained 2B
+   lands. `src/startup/label.py --backend gemini` writes `out/startup/labels/<corpus>.jsonl`. Every row carries
+   `meta.stand_in: true`, and the UI must show it. The local backend writes the same file, so the switch is one flag.
+   Only public material goes to Gemini. The scored submission and the network-off air-gap demo still need the
+   local model.
 
 ---
 

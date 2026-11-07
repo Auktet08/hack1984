@@ -48,8 +48,18 @@ def pick_examples(item, pool, k):
     return (same + other)[:k]
 
 
-def build_prompt(item, examples, guide):
-    parts = [HEADER, guide, "\n===== WORKED EXAMPLES (gold labels) =====\n"]
+def focus_block(focus):
+    """Retarget the guide to another drug (startup analogs/transcripts). None keeps the prompt byte-identical."""
+    return ("\n===== PRODUCT OVERRIDE FOR THIS RUN =====\n"
+            f"For this run, OUR product is {focus}. Read every rule above with this product in place of products "
+            "A and B: aspects judge this product, polarity is about this product, and Tagrisso, Rybrevant and "
+            "other drugs count as rivals. Transcript items are one speaker's turn at a meeting; the title names "
+            "the speaker and their role, and that role decides the speaker field.\n")
+
+
+def build_prompt(item, examples, guide, focus=None):
+    parts = [HEADER, guide + (focus_block(focus) if focus else ""),
+             "\n===== WORKED EXAMPLES (gold labels) =====\n"]
     for ex in examples:
         parts.append("ITEM:\n" + json.dumps({k: ex.get(k) for k in INPUT_KEYS}, ensure_ascii=False))
         parts.append("LABEL:\n" + json.dumps({k: ex.get(k) for k in LABEL_KEYS}, ensure_ascii=False) + "\n")
@@ -196,11 +206,11 @@ def call_gemini(prompt, model, cwd, timeout):
     return json.loads(r.stdout)
 
 
-def run_one(item, pool, k, guide, model, rawdir, cwd, timeout, retries, backend="cli", thinking=None):
+def run_one(item, pool, k, guide, model, rawdir, cwd, timeout, retries, backend="cli", thinking=None, focus=None):
     raw_path = rawdir / f"{item['item_id']}.json"
     if raw_path.exists():
         return json.load(open(raw_path))
-    prompt = build_prompt(item, pick_examples(item, pool, k), guide)
+    prompt = build_prompt(item, pick_examples(item, pool, k), guide, focus)
     err = None
     for attempt in range(retries + 1):
         try:
@@ -230,6 +240,8 @@ def main():
     ap.add_argument("--backend", choices=["cli", "api"], default="cli",
                     help="api = direct REST call (needs GEMINI_API_KEY), schema-constrained, faster")
     ap.add_argument("--thinking", default=None, help="api only: thinkingLevel, e.g. minimal|low|medium|high")
+    ap.add_argument("--focus", default=None,
+                    help='retarget the guide to another drug, e.g. "poziotinib (Spectrum; aliases ...)"')
     a = ap.parse_args()
     if "test" in Path(a.items).name.lower():
         sys.exit("Refusing: never send test items to a frontier model (CLAUDE.md rule 6).")
@@ -253,7 +265,7 @@ def main():
     results, failed = {}, []
     with ThreadPoolExecutor(a.jobs) as ex:
         futs = {ex.submit(run_one, it, pool, a.k, guide, a.model, rawdir, cwd, a.timeout, a.retries,
-                          a.backend, a.thinking): it
+                          a.backend, a.thinking, a.focus): it
                 for it in items}
         for n, f in enumerate(as_completed(futs), 1):
             it = futs[f]
