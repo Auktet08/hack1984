@@ -1,0 +1,308 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ideation: Startup Pitch</title>
+<style>
+:root{--bg:#fbfaf7;--fg:#1f2328;--muted:#5b6370;--line:#e3e0d8;--card:#ffffff;--accent:#2f5d8a;--accent-soft:#e6eef7;--accent-text:#1f4468;--good-soft:#e5f3ea;--good-text:#1d5a34;--warn-soft:#fbf0dc;--warn-text:#7a4b06;--bad-soft:#f8e3e1;--bad-text:#8a2a20;--band:#d9d5cc;}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#16181c;--fg:#e6e6e3;--muted:#a3a9b3;--line:#2e3239;--card:#1d2026;--accent:#7fb0e0;--accent-soft:#1f2c3b;--accent-text:#b9d6f2;--good-soft:#1b2f22;--good-text:#9fd8b2;--warn-soft:#33280f;--warn-text:#f0cf8f;--bad-soft:#3a1f1c;--bad-text:#f2b0a8;--band:#3a3e46;}}
+:root[data-theme="dark"]{--bg:#16181c;--fg:#e6e6e3;--muted:#a3a9b3;--line:#2e3239;--card:#1d2026;--accent:#7fb0e0;--accent-soft:#1f2c3b;--accent-text:#b9d6f2;--good-soft:#1b2f22;--good-text:#9fd8b2;--warn-soft:#33280f;--warn-text:#f0cf8f;--bad-soft:#3a1f1c;--bad-text:#f2b0a8;--band:#3a3e46;}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:15.5px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif}
+main{max-width:900px;margin-inline:auto;padding:32px 16px 64px}
+p,li,dd{max-width:72ch}
+h1{font-size:1.75rem;line-height:1.25;margin:.2em 0 .3em}
+h2{font-size:1.3rem;margin:2.2em 0 .6em;padding-bottom:.25em;border-bottom:1px solid var(--line)}
+h3{font-size:1.1rem;margin:0 0 .4em}
+.eyebrow{font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.meta{display:flex;flex-wrap:wrap;gap:6px 18px;color:var(--muted);font-size:.9rem;margin:.4em 0 1.2em}
+.meta b{color:var(--fg);font-weight:600}
+strong{color:inherit}
+code{font:0.88em ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;background:var(--accent-soft);color:var(--accent-text);padding:1px 5px;border-radius:4px}
+.verdict{background:var(--good-soft);border-radius:10px;padding:16px 18px;margin:1em 0}
+.verdict p{margin:.4em 0;color:var(--fg)}
+.verdict .eyebrow{color:var(--good-text)}
+ul.jump{columns:2;column-gap:28px;padding-left:1.1em}
+@media (max-width:640px){ul.jump{columns:1}}
+article.idea{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin:16px 0}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:.2em 0 .8em}
+.chip{font-size:.78rem;font-weight:600;padding:2px 10px;border-radius:999px}
+.chip.id{background:var(--accent-soft);color:var(--accent-text)}
+.chip.ax{background:var(--warn-soft);color:var(--warn-text)}
+.chip.cf{background:var(--good-soft);color:var(--good-text)}
+dl.fields{margin:0}
+dl.fields dt{font-size:.75rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:700;margin-top:.8em}
+dl.fields dd{margin:.15em 0 0}
+.callout{background:var(--warn-soft);border-radius:10px;padding:12px 16px;margin:1em 0}
+.callout .eyebrow{color:var(--warn-text)}
+.callout p{margin:.3em 0}
+table{border-collapse:collapse;width:100%;font-size:.92rem;margin:.6em 0}
+th,td{border-bottom:1px solid var(--line);padding:8px 8px;text-align:left;vertical-align:top}
+th{font-size:.78rem;letter-spacing:.05em;text-transform:uppercase;color:var(--muted)}
+.tablewrap{overflow-x:auto}
+figure{margin:1em 0}
+figure svg{width:100%;height:auto;display:block}
+figcaption{font-size:.85rem;color:var(--muted);margin-top:.3em}
+svg text{fill:var(--fg);font-family:inherit}
+svg .box{fill:var(--card);stroke:var(--line);stroke-width:1.5}
+svg .box.hl{fill:var(--accent-soft);stroke:var(--accent)}
+svg .ar{stroke:var(--muted);stroke-width:1.5;fill:none}
+svg .ar.dash{stroke-dasharray:4 4}
+svg .head{fill:var(--muted)}
+svg .sep{stroke:var(--line);stroke-width:1.5;stroke-dasharray:6 5}
+svg .lane{font-size:11px;letter-spacing:.08em;fill:var(--muted);font-weight:700}
+svg .small{font-size:12px;fill:var(--muted)}
+svg .band{fill:var(--band)}
+svg .now{stroke:var(--accent);stroke-width:2.5;fill:none}
+svg .dot{fill:var(--bad-text)}
+svg .axis{stroke:var(--muted);stroke-width:1}
+footer.composition-signal{margin-top:3em;padding-top:1em;border-top:1px solid var(--line);font-size:.82rem;color:var(--muted)}
+</style>
+</head>
+<body>
+<main>
+<div class="eyebrow">Ideation · startup for the pitch</div>
+<h1>Ideation: a startup built on the drug-signal model, Tavily and Exa</h1>
+<div class="meta">
+  <span><b>Date:</b> <time datetime="2026-11-07">2026-11-07</time></span>
+  <span><b>Topic:</b> startup-pitch</span>
+  <span><b>Focus:</b> a startup to present that uses the local drug model together with Tavily and Exa</span>
+  <span><b>Mode:</b> elsewhere-software (the product and company, grounded in this repo)</span>
+</div>
+
+<section class="verdict" aria-label="Recommendation">
+  <div class="eyebrow">Recommendation</div>
+  <p><strong>Pitch idea 1 as the company and idea 3 as the way in.</strong> Tavily and Exa watch the public conversation, and the local model finds the aspects where public evidence is split or thin. Those gaps become the questions for the next advisory board. The board's private transcript is then labeled offline, in the same schema and by the same model, and the product shows where what experts say in private differs from what the public record says.</p>
+  <p>This is the one framing where both halves are needed. Tavily and Exa only help with public data, and a local model only matters for private data. It also matches the track's name ("Private Signals") and the sponsor's world: Within3 runs advisory boards and HCP insights (check the wording on their site before it goes on a slide).</p>
+</section>
+
+<section id="grounding-context">
+<h2>Topic Context</h2>
+<ul>
+  <li><strong>What exists.</strong> A rules-first labeler (0.843 dev composite) that tags each item with a signal type, whether it's actionable, and five aspects (efficacy, safety, convenience, access/cost, evidence quality). Each aspect gets a polarity from −2 to +2, a speaker role and a verbatim quote. Qwen3.5-2B is the planned model path, built for transcripts first. Citations are exact substrings by construction (<code>PROBLEM.md</code> §0, lean plan).</li>
+  <li><strong>How it's judged beyond the leaderboard.</strong> A network-off run on private transcripts, citations that support claims, how the trends look, usefulness to a launch expert, cost per 100 items, and bonus points for effective Tavily/Exa use and a credible startup (<code>PROBLEM.md</code> §2).</li>
+  <li><strong>Current startup draft.</strong> "Signal-to-Dose: on-prem launch intelligence for pharma brand teams." It has three tiers (Public Pulse, Private Signals, Launch Room), a per-brand annual licence, and a moat of ontology, per-TA fine-tunes and provenance (<code>PROBLEM.md</code> §7). It's a solid baseline, but Tavily and Exa only appear in it as a "live monitoring" tier.</li>
+  <li><strong>Tavily/Exa today.</strong> Build time only. They feed the knowledge pack (trials, rivals, bodies, timeline), the A–D research reports, and one live-mode demo moment. They're never called in the scored run. 27 ledger entries so far. There's no Exa API key, so Exa runs through MCP only (<code>PROBLEM.md</code> §6, <code>research/ledger.jsonl</code>).</li>
+  <li><strong>Pitch facts on hand</strong> (report D, each still needs a primary-source check). ICH E2D(R1) names MAH social/digital listening as a data source with reporting duties. Pierce 2017: 935,246 posts became 13 causality reviews after three months of manual curation. 65% of the top 20 pharmas banned ChatGPT over data-leak concerns. AI-in-PV market sizes vary widely by definition.</li>
+  <li><strong>Sponsor.</strong> Within3 (<code>drug track/README.md</code>). The user said competitor research isn't needed for a hackathon, so no new searches were run for this ideation.</li>
+  <li><strong>Time.</strong> The deadline is Sun 2026-11-08, 11:00 EST, with a 25-second startup close in a roughly 4-minute demo. Ideas are judged partly on what can be shown with what's already planned.</li>
+</ul>
+</section>
+
+<section id="topic-axes">
+<h2>Topic Axes</h2>
+<ol>
+  <li><strong>Data side:</strong> public web evidence vs private voice (advisory boards, MSL notes, transcripts).</li>
+  <li><strong>Buyer and job:</strong> brand/launch, medical affairs, pharmacovigilance, market access.</li>
+  <li><strong>What Tavily and Exa do</strong> in the product: discovery, monitoring, enrichment, onboarding.</li>
+  <li><strong>Output and workflow:</strong> what lands on someone's desk and what they do with it.</li>
+  <li><strong>Scale and moat:</strong> going beyond two drugs, and what compounds.</li>
+</ol>
+</section>
+
+<section id="ranked-ideas">
+<h2>Ranked Ideas</h2>
+<ul class="jump">
+  <li><a href="#i1">1. Public questions, private answers</a></li>
+  <li><a href="#i2">2. Brand-plan claim watch</a></li>
+  <li><a href="#i3">3. Listen without the AE fear (the way in)</a></li>
+  <li><a href="#i4">4. A new launch in an afternoon</a></li>
+  <li><a href="#i5">5. Launch analog curves</a></li>
+  <li><a href="#i6">6. Live advisory-board copilot</a></li>
+</ul>
+
+<article class="idea" id="i1">
+  <h3>1. Public questions, private answers</h3>
+  <div class="chips"><span class="chip id">I1</span><span class="chip ax">Axis: data side</span><span class="chip cf">Confidence 75%</span><span class="chip cf">Complexity: Medium</span></div>
+  <figure>
+    <svg viewBox="0 0 800 250" role="img" aria-label="Loop: Tavily and Exa pull public evidence, the local model labels it, contested aspects become advisory-board questions, the private transcript is labeled offline by the same model, and a gap map compares public and private.">
+      <defs><marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="head" d="M0,0 L10,5 L0,10 z"/></marker></defs>
+      <text class="lane" x="20" y="16">PUBLIC · NETWORK ON</text>
+      <text class="lane" x="20" y="242">PRIVATE · NETWORK OFF</text>
+      <line class="sep" x1="230" y1="122" x2="600" y2="122"/>
+      <rect class="box" x="20" y="26" width="200" height="58" rx="8"/>
+      <text x="120" y="51" text-anchor="middle" font-size="13" font-weight="600">Tavily + Exa</text>
+      <text x="120" y="70" text-anchor="middle" font-size="12">pull public evidence</text>
+      <rect class="box" x="280" y="26" width="200" height="58" rx="8"/>
+      <text x="380" y="51" text-anchor="middle" font-size="13" font-weight="600">Local 2B labels it</text>
+      <text x="380" y="70" text-anchor="middle" font-size="12">aspect · polarity · quote</text>
+      <rect class="box hl" x="540" y="26" width="200" height="58" rx="8"/>
+      <text x="640" y="51" text-anchor="middle" font-size="13" font-weight="600">Contested or thin</text>
+      <text x="640" y="70" text-anchor="middle" font-size="12">aspects this week</text>
+      <rect class="box" x="540" y="160" width="200" height="58" rx="8"/>
+      <text x="640" y="185" text-anchor="middle" font-size="13" font-weight="600">Ad board / MSL answers</text>
+      <text x="640" y="204" text-anchor="middle" font-size="12">private transcript</text>
+      <rect class="box" x="280" y="160" width="200" height="58" rx="8"/>
+      <text x="380" y="185" text-anchor="middle" font-size="13" font-weight="600">Same model, same schema</text>
+      <text x="380" y="204" text-anchor="middle" font-size="12">labeled offline</text>
+      <rect class="box hl" x="20" y="160" width="200" height="58" rx="8"/>
+      <text x="120" y="185" text-anchor="middle" font-size="13" font-weight="600">Gap map</text>
+      <text x="120" y="204" text-anchor="middle" font-size="12">public vs private, per aspect</text>
+      <path class="ar" d="M220,55 L278,55" marker-end="url(#arr)"/>
+      <path class="ar" d="M480,55 L538,55" marker-end="url(#arr)"/>
+      <path class="ar" d="M640,84 L640,158" marker-end="url(#arr)"/>
+      <text class="small" x="650" y="118">questions for the</text>
+      <text class="small" x="650" y="133">next ad board</text>
+      <path class="ar" d="M540,189 L482,189" marker-end="url(#arr)"/>
+      <path class="ar" d="M280,189 L222,189" marker-end="url(#arr)"/>
+      <path class="ar dash" d="M120,160 L120,86" marker-end="url(#arr)"/>
+      <text class="small" x="130" y="118">what to watch next</text>
+    </svg>
+    <figcaption>One schema across both sides. Tavily and Exa work on the public side only, and the private side never touches the network.</figcaption>
+  </figure>
+  <dl class="fields">
+    <dt>Description</dt>
+    <dd>Each week, Tavily (dated news, regulator and HTA pages) and Exa (semantic search, find-similar for papers and commentary) pull the public conversation about a brand. The local model labels it. The product then picks the aspects where public evidence is <em>contested</em> (polarity split across speakers, for example HCPs negative on safety while the company is positive) or <em>thin</em> (few items, low evidence quality). It turns those into a short question set for the next advisory board or MSL round, with the public quotes that prompted each question attached. The answers come back as a private transcript, which the same model labels offline in the same schema. The output is a gap map: per aspect and speaker, what the public record says next to what your experts said in the room, each side backed by quotes.</dd>
+    <dt>Basis</dt>
+    <dd><strong>direct:</strong> the track is "Private Signals", and judges run the model network-off on private transcripts we haven't seen (<code>PROBLEM.md</code> §1–2). The architecture already splits network-on build-time research from network-off inference (<code>PROBLEM.md</code> §4, §6). The aspect/polarity/speaker schema is source-agnostic, so a transcript and a PubMed abstract produce comparable rows. The transcript path with speaker roles is lean plan item 5. <strong>reasoned:</strong> the hardest pitch question is "why do you need web search <em>and</em> a local model?" In this design the answer is structural, not bolted on: Tavily and Exa only help on public data, and a local model only matters on private data.</dd>
+    <dt>Rationale</dt>
+    <dd>It turns the two judged extras (the Tavily/Exa bonus and the network-off transcript run) into one product story instead of two separate demo beats. It also gives the sponsor an obvious "this plugs into what you already do" reading, since advisory boards are where private expert opinion lives. The gap ("experts in the room are more worried about rash than the press coverage suggests") is the kind of insight a launch team would act on, which is the usefulness criterion.</dd>
+    <dt>Downsides</dt>
+    <dd>Question generation and the contested-aspect detector are new work. For the demo they can be simple rules over the labeled corpus (an aspect where speakers' mean polarity differs by 2+ points or there are fewer than N items). The gap map needs a real private transcript. Mock ones (invented people) are already planned, but the gap will be staged, so say so. There's a risk of looking like we're pitching Within3's own product back to them, so frame it as a layer on top of an insights platform, not a replacement.</dd>
+  </dl>
+</article>
+
+<article class="idea" id="i2">
+  <h3>2. Brand-plan claim watch</h3>
+  <div class="chips"><span class="chip id">I2</span><span class="chip ax">Axis: output and workflow</span><span class="chip cf">Confidence 65%</span><span class="chip cf">Complexity: Medium</span></div>
+  <dl class="fields">
+    <dt>Description</dt>
+    <dd>A launch team doesn't read feeds. It defends a plan built on a handful of claims, for example "subcutaneous dosing removes the infusion-chair burden" or "the overall survival benefit outweighs the added toxicity". The team enters 5–10 claims, each mapped to a product, an aspect and a direction. Every week, Tavily and Exa pull evidence that bears on each claim, the local model labels it, and each claim gets a scorecard: supporting vs contradicting quotes, the trend, and who is saying it. An alert fires when a claim's balance flips. Each actionable signal is routed to the function that owns the claim (medical, market access, PV).</dd>
+    <dt>Basis</dt>
+    <dd><strong>direct:</strong> the five aspects map closely onto brand-plan pillars (efficacy, safety, convenience, access/cost, evidence quality), and the problem statement's second weekly question is "how is the conversation moving?" (<code>PROBLEM.md</code> §1). Exa's semantic search takes a natural-language description as the query (<code>RESEARCH_README.md</code> §3, "pages like this one"), which suits claim-shaped queries. <strong>reasoned:</strong> grouping signals by the claim they threaten makes "actionable" concrete. The card says what it's actionable <em>for</em>.</dd>
+    <dt>Rationale</dt>
+    <dd>It's the most "would a launch expert act on it?" shaped output, and it gives Tavily and Exa a job they're actually good at (targeted retrieval against a stated hypothesis) instead of generic monitoring. It also demos well: one claim card turning amber with the quote that did it.</dd>
+    <dt>Downsides</dt>
+    <dd>Brand claims are confidential, and sending them to a search API as queries leaks strategy. Queries must be generic public terms derived locally (drug, outcome, setting), never the claim's wording. That's the same R1 discipline we already follow, and worth saying out loud in the pitch. Claim-to-evidence matching beyond the aspect, product and polarity filter is unbuilt, but the filter is enough for v1.</dd>
+  </dl>
+</article>
+
+<article class="idea" id="i3">
+  <h3>3. Listen without the AE fear (the way in)</h3>
+  <div class="chips"><span class="chip id">I3</span><span class="chip ax">Axis: buyer and job</span><span class="chip cf">Confidence 60%</span><span class="chip cf">Complexity: Low</span></div>
+  <dl class="fields">
+    <dt>Description</dt>
+    <dd>Lead the go-to-market with pharmacovigilance, not insight. Every item, transcript turn or field note that carries non-neutral safety gets the ICH E2D four-box check (AE quote, product, patient cue, reporter role), with each box pointing at its quote. The result is a triage queue for the safety team. Each decision is stored with the quote, source URL, retrieval time (from the Tavily/Exa provenance log), model version and reviewer verdict, so the record doubles as an inspection-ready audit trail. Once PV trusts it, the insight product (ideas 1 and 2) sells into the same account.</dd>
+    <dt>Basis</dt>
+    <dd><strong>direct:</strong> report D fact 1 (E2D(R1) names MAH digital listening as a source with reporting duties; the clock starts when a reviewer identifies the four minimum criteria), fact 2 (Pierce 2017: 935,246 posts became 13 causality reviews after three months of manual curation) and fact 5 (65% of the top 20 pharmas banned ChatGPT). The AE triage flag is already lean plan item 6, and citations are exact substrings by construction. <strong>reasoned:</strong> safety spend is mandatory and insight spend is discretionary. Fear of triggering AE reporting duties is also a reason teams avoid listening to private channels at all, so removing it unlocks idea 1.</dd>
+    <dt>Rationale</dt>
+    <dd>It gives the pitch a buyer with a regulatory reason to pay this year, and it's the cheapest idea to demo because the flag is already planned. The audit-trail angle makes "no quote, no claim" a compliance feature, not just a scoring trick.</dd>
+    <dt>Downsides</dt>
+    <dd>PV buyers are conservative, and validated (GxP) software is a heavy lift. A missed AE is far worse than a missed insight, and we have no recall numbers for the 2B on AE detection. Tavily and Exa play a smaller role here (public forums and news only), so it can't be the whole story for the bonus. Pitch it as the way in, with idea 1 as the company.</dd>
+  </dl>
+</article>
+
+<article class="idea" id="i4">
+  <h3>4. A new launch in an afternoon</h3>
+  <div class="chips"><span class="chip id">I4</span><span class="chip ax">Axis: scale and moat</span><span class="chip cf">Confidence 60%</span><span class="chip cf">Complexity: Medium</span></div>
+  <dl class="fields">
+    <dt>Description</dt>
+    <dd>Type a drug name and indication. Exa (structured agent runs, or MCP search) and Tavily (dated news, regulator and HTA pages) build that launch's knowledge pack: aliases, trial-to-NCT map, rivals, regulator, HTA and payer bodies with speaker roles, and a dated event timeline. Every entry keeps its source URL. The local pipeline then labels the public backlog, and the dashboard is live for a new brand the same day. Tavily and Exa are the onboarding engine. The customer's private data still never leaves.</dd>
+    <dt>Basis</dt>
+    <dd><strong>direct:</strong> this knowledge pack is already the "Must" Tavily/Exa job in <code>PROBLEM.md</code> §6 (trials, rivals, bodies, timeline, built by an Exa Agent with <code>outputSchema</code> plus Tavily search), and "per-therapeutic-area fine-tunes" is the stated moat (§7). <strong>reasoned:</strong> the obvious judge objection is "you built this for two drugs". Showing that the per-launch setup is a search job rather than a consulting project answers it, and a per-brand licence only scales if onboarding is cheap.</dd>
+    <dt>Rationale</dt>
+    <dd>It's the strongest "effective use of Tavily and Exa" story, because they become the reason the business scales, not a demo garnish. It reuses work we'd do anyway for the two track drugs.</dd>
+    <dt>Downsides</dt>
+    <dd>Rules are tuned to EGFR NSCLC sources, so a new therapeutic area would lean on the model and quality is unmeasured. There's no Exa API key, so agent runs go through MCP or Tavily instead. A live third-drug run on stage could go wrong, so prerecord it or show the generated pack only.</dd>
+  </dl>
+</article>
+
+<article class="idea" id="i5">
+  <h3>5. Launch analog curves</h3>
+  <div class="chips"><span class="chip id">I5</span><span class="chip ax">Axis: what Tavily and Exa do</span><span class="chip cf">Confidence 50%</span><span class="chip cf">Complexity: Medium</span></div>
+  <figure>
+    <svg viewBox="0 0 640 220" role="img" aria-label="Illustrative chart: a grey band shows the range of safety sentiment for past analog launches over 52 weeks; this launch's line drops below the band around week 20.">
+      <line class="axis" x1="50" y1="20" x2="50" y2="180"/>
+      <line class="axis" x1="50" y1="180" x2="620" y2="180"/>
+      <line class="sep" x1="50" y1="100" x2="620" y2="100"/>
+      <text class="small" x="42" y="24" text-anchor="end">+2</text>
+      <text class="small" x="42" y="104" text-anchor="end">0</text>
+      <text class="small" x="42" y="184" text-anchor="end">−2</text>
+      <polygon class="band" points="50,70 200,75 350,80 500,78 620,76 620,120 500,125 350,130 200,125 50,115"/>
+      <polyline class="now" points="50,90 120,95 200,105 260,140 300,152 350,138"/>
+      <circle class="dot" cx="300" cy="152" r="5"/>
+      <text class="small" x="312" y="168">outside the analog band</text>
+      <text class="small" x="50" y="196" text-anchor="middle">0</text>
+      <text class="small" x="620" y="196" text-anchor="middle">52</text>
+      <text class="small" x="335" y="212" text-anchor="middle">weeks since launch · safety sentiment</text>
+      <rect class="band" x="400" y="10" width="18" height="10"/>
+      <text class="small" x="424" y="19">past analog launches</text>
+      <line class="now" x1="400" y1="34" x2="418" y2="34"/>
+      <text class="small" x="424" y="38">this launch</text>
+    </svg>
+    <figcaption>Illustrative shape, not data.</figcaption>
+  </figure>
+  <dl class="fields">
+    <dt>Description</dt>
+    <dd>"Is this normal?" is the question a trend line can't answer alone. Exa's find-similar and Tavily's date-bounded search retrieve coverage of past comparable launches (earlier targeted therapies in the same setting, for example), and the local model labels it in the same schema. Each aspect's trend is then drawn against a band of where analog launches sat at the same week. A drop outside the band is the signal, not a drop on its own.</dd>
+    <dt>Basis</dt>
+    <dd><strong>direct:</strong> the sentiment trend report (−2 to +2 by product × aspect × speaker, week over week) is a required deliverable and a P0 demo screen (<code>PROBLEM.md</code> §1, §8). Exa find-similar is already slotted for "expand this signal" (§6). <strong>reasoned:</strong> raw sentiment lines are hard to read without a baseline. Every new launch adds to the analog library, so the baseline compounds into a dataset competitors don't have.</dd>
+    <dt>Rationale</dt>
+    <dd>It's a strong single visual for the trends criterion, and a compounding-data moat that's easy to explain in one sentence.</dd>
+    <dt>Downsides</dt>
+    <dd>Historical coverage from search is uneven (older news snippets and links rot), so the bands could be noisy. Choosing which launches count as analogs is a judgment call that needs a domain expert. It's not buildable to a credible standard by tomorrow, so pitch it as roadmap with this mock-up.</dd>
+  </dl>
+</article>
+
+<article class="idea" id="i6">
+  <h3>6. Live advisory-board copilot</h3>
+  <div class="chips"><span class="chip id">I6</span><span class="chip ax">Axis: output and workflow</span><span class="chip cf">Confidence 45%</span><span class="chip cf">Complexity: High</span></div>
+  <dl class="fields">
+    <dt>Description</dt>
+    <dd>Idea 1, in real time. During a virtual advisory board, the local model labels each turn as it's spoken. The moderator's side panel fills an aspect × speaker grid as the meeting goes, raises the AE triage flag the moment an HCP describes a patient's side effect, and surfaces "public evidence says otherwise" cards from the locally cached Tavily/Exa pack. The moderator can probe a point while the experts are still in the room.</dd>
+    <dt>Basis</dt>
+    <dd><strong>direct:</strong> the transcript path (lean plan item 5), AE flag (item 6) and offline knowledge pack (<code>PROBLEM.md</code> §6) are the three parts it needs. Demo step 4 already pastes a mock transcript into the Analyze screen (§8). <strong>reasoned:</strong> post-meeting summaries arrive after the chance to follow up is gone, and a model on the moderator's laptop needs no IT approval to sit in a confidential meeting.</dd>
+    <dt>Rationale</dt>
+    <dd>It's the biggest "wow" version of the air-gap demo, and it ties the product to the sponsor's live-meeting setting.</dd>
+    <dt>Downsides</dt>
+    <dd>It depends on per-turn latency on the Mac, which isn't measured yet (lean plan item 8). Real-time UX is a different product from a weekly brief. It overlaps idea 1, so present it as idea 1's live mode, not a separate company. If latency is poor, show it as a replay of a timed transcript.</dd>
+  </dl>
+</article>
+
+<div class="callout">
+  <div class="eyebrow">How they fit in a 25-second close</div>
+  <p><strong>Company:</strong> idea 1 (public questions, private answers). <strong>Way in:</strong> idea 3 (AE-safe listening for PV). <strong>Why it scales:</strong> idea 4 (a new launch in an afternoon, powered by Tavily and Exa). Ideas 2, 5 and 6 are features and roadmap lines for the slides. The existing tiers in <code>PROBLEM.md</code> §7 still work underneath: Public Pulse is the Tavily/Exa half, and Private Signals is the offline half.</p>
+</div>
+</section>
+
+<section id="rejection-summary">
+<h2>Rejection Summary</h2>
+<div class="tablewrap">
+<table>
+<thead><tr><th>#</th><th>Idea</th><th>Reason rejected</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>Weekly launch brief, auto-generated</td><td>Already the <code>PROBLEM.md</code> §7 baseline. Kept as the delivery surface for ideas 1–2, not a new idea.</td></tr>
+<tr><td>2</td><td>MSL field-note coder</td><td>Duplicates the private side of idea 1.</td></tr>
+<tr><td>3</td><td>Advisory-board summary in minutes</td><td>Duplicates ideas 1 and 6, without the public half that makes Tavily/Exa necessary.</td></tr>
+<tr><td>4</td><td>Competitor launch watch</td><td>Generic monitoring that any alert tool does. Folded into idea 2 as rival-related claims.</td></tr>
+<tr><td>5</td><td>"What changed since last week" diff view</td><td>A feature of the trends screen. Folded into idea 2's flip alerts.</td></tr>
+<tr><td>6</td><td>Pre-check promo copy for medical-legal-regulatory review</td><td>Different buyer and job (reviewing our own claims, not reading evidence). Scope overrun.</td></tr>
+<tr><td>7</td><td>Edge laptop for MSLs in hospitals</td><td>A packaging detail of idea 1. Better as a brainstorm variant.</td></tr>
+<tr><td>8</td><td>Cited digest for oncologists</td><td>No clear payer, and it drops the private-data reason for a local model.</td></tr>
+<tr><td>9</td><td>Launch-sentiment signals for biotech investors</td><td>Investors are happy with cloud tools, so the local model loses its point. Weak fit with the sponsor.</td></tr>
+<tr><td>10</td><td>Publish the launch-signal schema as an open standard</td><td>No near-term value, and a hackathon can't demonstrate it.</td></tr>
+<tr><td>11</td><td>Customer-owned learning loop (corrections fine-tune the local model)</td><td>A real moat line, but LoRA is cut in the lean plan. Use it as one roadmap sentence.</td></tr>
+<tr><td>12</td><td>Bloomberg-style launch ticker</td><td>Restates the baseline dashboard in different words.</td></tr>
+<tr><td>13</td><td>Evidence-quality "credit rating" per claim</td><td>Evidence quality is one of five aspects and sparse in dev (8/60). Too thin to carry a company.</td></tr>
+<tr><td>14</td><td>Route each signal to an owner with a playbook</td><td>A good feature, folded into idea 2. Not a company on its own.</td></tr>
+<tr><td>15</td><td>Sealed appliance (a Mac mini in the customer's rack)</td><td>A packaging and pricing choice. Mention it on the pricing slide ("the demo machine is the product").</td></tr>
+<tr><td>16</td><td>Free public tier as lead generation</td><td>Pricing detail, already implied by the §7 tiers.</td></tr>
+<tr><td>17</td><td>Run the 2B in the browser (WebGPU, nothing to install)</td><td>Unproven for a 2B with JSON grammar. On-prem already answers procurement.</td></tr>
+<tr><td>18</td><td>Sell a labeled public-signal data feed</td><td>Public-only, so no need for a local model. A commodity.</td></tr>
+<tr><td>19</td><td>Fact-check desk for launch news</td><td>Duplicates the citation-first trust story already in every idea.</td></tr>
+<tr><td>20</td><td>Listening for patient advocacy groups</td><td>No budget, and patient data adds privacy risk without a buyer.</td></tr>
+<tr><td>21</td><td>Market-access tracker for payer and HTA decisions</td><td>A real buyer, but access/cost is 1 of 60 dev aspects, so the model is weakest exactly there.</td></tr>
+<tr><td>22</td><td>Inspection-ready listening ledger</td><td>Merged into idea 3 as its audit trail.</td></tr>
+<tr><td>23</td><td>"Pull request" edits to the brand narrative when evidence shifts</td><td>Merged into idea 2.</td></tr>
+<tr><td>24</td><td>Listening-to-trend open pipeline (open source play)</td><td>Report D found almost no open code here, but open-sourcing the core undercuts the licence model at this stage.</td></tr>
+</tbody>
+</table>
+</div>
+<p>30 candidates generated, 24 cut or merged, 6 kept. All six lenses were run in this session, without subagents. Bases were checked against <code>PROBLEM.md</code>, the lean plan, <code>RESEARCH_README.md</code> and report D. No web searches were run. Every axis has at least one survivor.</p>
+</section>
+
+<footer class="composition-signal">Composed <time datetime="2026-11-07">2026-11-07</time> by ce-ideate from the user prompt ("make this into a startup to present… relates to Tavily and Exa") and <code>drug track/PROBLEM.md</code> §7.</footer>
+</main>
+</body>
+</html>
