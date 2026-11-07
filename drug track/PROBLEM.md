@@ -20,6 +20,10 @@ research) · `../CLAUDE.md` (experiment protocol) · `../CONCEPTS.md` (vocabular
 **Since 13:00:** North chose the **lean plan** (decision 8). §4.3, §5, §10 and §13 were redrafted to match, and
 the open-source research for targets A–D is done (`research/reports/`).
 
+**Competition theme: privacy-first startups.** The pitch and demo should show a product that is private by design
+(a local model, network off, nothing leaves the customer's hardware), not a product with privacy added later. This
+frames the pitch only. It doesn't add privacy engineering work beyond running the model locally.
+
 **Deadline: Sun 2026-11-08, 11:00 EST, for everything:** submission file, code, weights, demo and pitch.
 That leaves about 22 hours including sleep.
 
@@ -98,6 +102,10 @@ traps; read `DATA.md` §5 and `../docs/solutions/best-practices/composite-scorer
 **Judges also weigh:** whether the citations support the claims; how the trends look in the demo; a
 **network-off run on private transcripts**; usefulness ("Would a launch-intelligence expert act on it?");
 cost per 100 items. **Bonus points:** effective use of Tavily and Exa, and a credible startup.
+
+**Theme: privacy-first startups.** The startup is judged as a privacy-first business, so lead with what stays on the
+customer's hardware and why that matters to the buyer. See `STARTUP.md` §10 for how we position against the sponsor,
+Within3.
 
 ---
 
@@ -272,6 +280,9 @@ tables with Tavily search and the Exa MCP tools.
 ---
 
 ## 7. The startup
+
+> **Superseded by `STARTUP.md`** (Sat 2026-11-07 evening): analog-launch comparison (mobocertinib), private
+> transcripts labeled offline, and Tavily/Exa as the per-drug setup engine. The text below is the earlier draft.
 
 **Working name:** Signal-to-Dose. Run one Tavily search for name conflicts before putting it on slides.
 
