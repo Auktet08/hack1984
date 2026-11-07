@@ -11,3 +11,5 @@ drug track/out/
 drug track/models/
 *:Zone.Identifier
 __pycache__/
+# Raw Tavily/Exa responses: keep out of git (RESEARCH_README §7)
+drug track/research/raw/
