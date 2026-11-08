@@ -1,0 +1,3 @@
+# Append-only logs that several lanes add to: keep both sides on merge.
+"drug track/research/ledger.jsonl" merge=union
+docs/experiments/log.md merge=union
