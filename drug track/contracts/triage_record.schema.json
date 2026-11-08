@@ -1,0 +1,111 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "triage_record.schema.json",
+  "title": "Side-effect triage record (out/startup/triage/<corpus>.jsonl)",
+  "description": "One record per transcript speaker turn that names a side effect. Rebuilt freely by src/startup/triage.py. 'candidate' means all four ICH E2D(R1) minimum criteria are met; never call it 'reportable'.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["case_id", "corpus", "turn_id", "item_ids", "status", "criteria", "missing", "source",
+               "texts", "safety_hint", "provenance"],
+  "properties": {
+    "case_id": {"type": "string", "pattern": "^TRI-"},
+    "corpus": {"type": "string", "minLength": 1},
+    "turn_id": {"type": "string", "minLength": 1},
+    "item_ids": {"type": "array", "minItems": 1, "items": {"type": "string"}, "uniqueItems": true},
+    "status": {"enum": ["candidate", "incomplete"]},
+    "criteria": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["adverse_event", "suspect_product", "identifiable_patient", "identifiable_reporter"],
+      "properties": {
+        "adverse_event": {"$ref": "#/$defs/criterion"},
+        "suspect_product": {"$ref": "#/$defs/criterion"},
+        "identifiable_patient": {"$ref": "#/$defs/criterion"},
+        "identifiable_reporter": {"$ref": "#/$defs/criterion"}
+      }
+    },
+    "missing": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {"enum": ["adverse_event", "suspect_product", "identifiable_patient", "identifiable_reporter"]}
+    },
+    "source": {
+      "type": "object",
+      "required": ["url", "published", "title", "speaker_name", "speaker_group", "speaker_role", "section", "page"],
+      "properties": {
+        "url": {"type": "string"},
+        "published": {"type": "string"},
+        "title": {"type": "string"},
+        "speaker_name": {"type": "string"},
+        "speaker_group": {"type": "string"},
+        "speaker_role": {"type": "string"},
+        "section": {"type": "string"},
+        "page": {"type": ["integer", "null"]}
+      }
+    },
+    "texts": {"type": "object", "additionalProperties": {"type": "string"}},
+    "safety_hint": {
+      "oneOf": [
+        {"type": "null"},
+        {
+          "type": "object",
+          "required": ["item_id", "polarity", "span", "labeler", "stand_in"],
+          "properties": {
+            "item_id": {"type": "string"},
+            "polarity": {"enum": [-2, -1, 0, 1, 2]},
+            "span": {"type": "string"},
+            "labeler": {"type": "string"},
+            "stand_in": {"type": "boolean"}
+          }
+        }
+      ]
+    },
+    "provenance": {"$ref": "#/$defs/provenance"}
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"status": {"const": "candidate"}}},
+      "then": {"properties": {"missing": {"maxItems": 0}}},
+      "else": {"properties": {"missing": {"minItems": 1}}}
+    }
+  ],
+  "$defs": {
+    "evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["item_id", "field", "span", "start"],
+      "properties": {
+        "item_id": {"type": "string"},
+        "field": {"enum": ["text", "speaker_name"]},
+        "span": {"type": "string", "minLength": 1},
+        "start": {"type": "integer", "minimum": 0}
+      }
+    },
+    "criterion": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["met", "evidence", "why"],
+      "properties": {
+        "met": {"type": "boolean"},
+        "evidence": {"type": "array", "items": {"$ref": "#/$defs/evidence"}},
+        "why": {"type": ["string", "null"]}
+      },
+      "if": {"properties": {"met": {"const": true}}},
+      "then": {"properties": {"evidence": {"minItems": 1}, "why": {"type": "null"}}},
+      "else": {"properties": {"why": {"type": "string", "minLength": 1}}}
+    },
+    "provenance": {
+      "type": "object",
+      "required": ["rules_version", "built_at", "turns_file", "labels_file", "labeler", "model", "stand_in"],
+      "properties": {
+        "rules_version": {"type": "string"},
+        "built_at": {"type": "string"},
+        "turns_file": {"type": "string"},
+        "labels_file": {"type": ["string", "null"]},
+        "labeler": {"type": ["string", "null"]},
+        "model": {"type": ["string", "null"]},
+        "stand_in": {"type": "boolean", "description": "Refers to the safety hint's labeler only; the criteria are rules."}
+      }
+    }
+  }
+}

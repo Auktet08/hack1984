@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "label_row.schema.json",
+  "title": "Startup label row (out/startup/labels/<corpus>.jsonl)",
+  "description": "One labeled item per line, written by src/startup/label.py. The format is fixed: the local backend writes the same rows with meta.stand_in false. Readers ignore unknown keys.",
+  "type": "object",
+  "required": ["item_id", "source", "url", "published", "product", "title", "text",
+               "signal_type", "actionable", "efficacy", "safety", "convenience", "access_cost",
+               "evidence_quality", "meta"],
+  "properties": {
+    "item_id": {"type": "string", "minLength": 1},
+    "source": {"type": "string", "minLength": 1},
+    "url": {"type": "string"},
+    "published": {"type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}$"},
+    "product": {"type": "string"},
+    "title": {"type": "string"},
+    "text": {"type": "string"},
+    "speaker_name": {"type": "string"},
+    "speaker_group": {"type": "string"},
+    "speaker_role": {"type": "string"},
+    "section": {"type": "string"},
+    "page": {"type": "integer"},
+    "turn": {"type": "integer"},
+    "part": {"type": ["integer", "null"]},
+    "words": {"type": "integer"},
+    "signal_type": {"enum": ["efficacy", "safety", "regulatory", "trial_update", "competitor_move",
+                             "access_pricing", "guideline", "expert_opinion", "none"]},
+    "actionable": {"enum": ["yes", "no"]},
+    "efficacy": {"$ref": "#/$defs/aspect"},
+    "safety": {"$ref": "#/$defs/aspect"},
+    "convenience": {"$ref": "#/$defs/aspect"},
+    "access_cost": {"$ref": "#/$defs/aspect"},
+    "evidence_quality": {"$ref": "#/$defs/aspect"},
+    "meta": {
+      "type": "object",
+      "required": ["labeler", "model", "stand_in", "labeled_at"],
+      "properties": {
+        "labeler": {"type": "string"},
+        "model": {"type": "string"},
+        "stand_in": {"type": "boolean"},
+        "labeled_at": {"type": "string"}
+      }
+    }
+  },
+  "$defs": {
+    "aspect": {
+      "oneOf": [
+        {"type": "null"},
+        {
+          "type": "object",
+          "required": ["span", "polarity", "speaker"],
+          "properties": {
+            "span": {"type": "string", "minLength": 1},
+            "polarity": {"enum": [-2, -1, 0, 1, 2]},
+            "speaker": {"type": "string", "minLength": 1}
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,138 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "gap_view.schema.json",
+  "title": "Gap view for one drug (out/startup/gap/<drug>.json)",
+  "description": "Per-aspect count, mean polarity and quotes for each transcript speaker group (private side) and the drug's public record (public side), with thin/split flags and template advisory-board questions. Built by src/startup/gap_view.py.",
+  "type": "object",
+  "required": ["drug", "built_at", "provenance", "thresholds", "columns", "aspects", "cells", "flags", "questions"],
+  "properties": {
+    "drug": {"type": "string", "minLength": 1},
+    "built_at": {"type": "string"},
+    "provenance": {
+      "type": "object",
+      "required": ["inputs", "stand_in"],
+      "properties": {
+        "inputs": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": ["file", "side", "rows", "labelers", "stand_in"],
+            "properties": {
+              "file": {"type": "string"},
+              "side": {"$ref": "#/$defs/side"},
+              "rows": {"type": "integer", "minimum": 0},
+              "labelers": {"type": "array", "items": {"type": "string"}},
+              "stand_in": {"type": "boolean"}
+            }
+          }
+        },
+        "stand_in": {"type": "boolean", "description": "True when any input row is a stand-in."}
+      }
+    },
+    "thresholds": {
+      "type": "object",
+      "required": ["min_n", "split_delta", "thin_n"],
+      "properties": {
+        "min_n": {"type": "integer", "minimum": 1},
+        "split_delta": {"type": "number", "minimum": 0},
+        "thin_n": {"type": "integer", "minimum": 0}
+      }
+    },
+    "columns": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["key", "label", "side", "n_rows"],
+        "properties": {
+          "key": {"type": "string"},
+          "label": {"type": "string"},
+          "side": {"$ref": "#/$defs/side"},
+          "n_rows": {"type": "integer", "minimum": 0}
+        }
+      }
+    },
+    "aspects": {
+      "const": ["efficacy", "safety", "convenience", "access_cost", "evidence_quality"]
+    },
+    "cells": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["aspect", "column", "n", "mean", "quotes"],
+        "properties": {
+          "aspect": {"$ref": "#/$defs/aspect"},
+          "column": {"type": "string"},
+          "n": {"type": "integer", "minimum": 0},
+          "mean": {"type": ["number", "null"], "minimum": -2, "maximum": 2},
+          "quotes": {
+            "type": "array",
+            "maxItems": 5,
+            "items": {
+              "type": "object",
+              "required": ["item_id", "span", "polarity", "url"],
+              "properties": {
+                "item_id": {"type": "string"},
+                "span": {"type": "string", "minLength": 1},
+                "polarity": {"enum": [-2, -1, 0, 1, 2]},
+                "url": {"type": "string"}
+              }
+            }
+          }
+        },
+        "if": {"properties": {"n": {"const": 0}}},
+        "then": {"properties": {"mean": {"type": "null"}, "quotes": {"maxItems": 0}}},
+        "else": {"properties": {"mean": {"type": "number"}}}
+      }
+    },
+    "flags": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["flag_id", "kind", "aspect", "side", "columns", "delta", "detail", "evidence"],
+        "properties": {
+          "flag_id": {"type": "string"},
+          "kind": {"enum": ["thin", "split"]},
+          "aspect": {"$ref": "#/$defs/aspect"},
+          "side": {"oneOf": [{"type": "null"}, {"enum": ["private", "public", "both"]}]},
+          "columns": {"type": "array", "items": {"type": "string"}},
+          "delta": {"type": ["number", "null"]},
+          "detail": {"type": "string"},
+          "evidence": {"type": "array", "items": {"$ref": "#/$defs/citation"}}
+        },
+        "if": {"properties": {"kind": {"const": "split"}}},
+        "then": {"properties": {"side": {"type": "null"}, "delta": {"type": "number"}, "columns": {"minItems": 2, "maxItems": 2}}},
+        "else": {"properties": {"side": {"enum": ["private", "public", "both"]}}}
+      }
+    },
+    "questions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["question_id", "flag_id", "text", "citations", "counts"],
+        "properties": {
+          "question_id": {"type": "string"},
+          "flag_id": {"type": "string"},
+          "text": {"type": "string", "minLength": 1},
+          "citations": {"type": "array", "items": {"$ref": "#/$defs/citation"}},
+          "counts": {"type": "object", "additionalProperties": {"type": "integer", "minimum": 0}}
+        }
+      }
+    }
+  },
+  "$defs": {
+    "side": {"enum": ["private", "public"]},
+    "aspect": {"enum": ["efficacy", "safety", "convenience", "access_cost", "evidence_quality"]},
+    "citation": {
+      "type": "object",
+      "required": ["item_id", "span", "url", "column"],
+      "properties": {
+        "item_id": {"type": "string"},
+        "span": {"type": "string", "minLength": 1},
+        "url": {"type": "string"},
+        "column": {"type": "string"}
+      }
+    }
+  }
+}

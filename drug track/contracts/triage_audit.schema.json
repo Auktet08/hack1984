@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "triage_audit.schema.json",
+  "title": "Triage audit line (out/startup/triage_audit.jsonl)",
+  "description": "Append-only. Written only by the app's decision endpoint; builders never open it. Each line snapshots the case at decision time.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["audit_id", "case_id", "decision", "reviewer", "note", "decided_at", "snapshot", "provenance"],
+  "properties": {
+    "audit_id": {"type": "string", "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"},
+    "case_id": {"type": "string", "pattern": "^TRI-"},
+    "decision": {"enum": ["confirmed_candidate", "dismissed", "needs_follow_up"]},
+    "reviewer": {"type": "string", "minLength": 1},
+    "note": {"type": ["string", "null"]},
+    "decided_at": {
+      "type": "string",
+      "description": "ISO 8601 with UTC offset. For confirmed_candidate this is the awareness date (day zero, ICH E2D(R1) §4.3.2).",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}(:\\d{2}(\\.\\d+)?)?([+-]\\d{2}:\\d{2}|Z)$"
+    },
+    "snapshot": {
+      "type": "object",
+      "required": ["status", "criteria", "source"],
+      "properties": {
+        "status": {"$ref": "triage_record.schema.json#/properties/status"},
+        "criteria": {"$ref": "triage_record.schema.json#/properties/criteria"},
+        "source": {"$ref": "triage_record.schema.json#/properties/source"}
+      }
+    },
+    "provenance": {
+      "allOf": [{"$ref": "triage_record.schema.json#/$defs/provenance"}],
+      "required": ["app_version"],
+      "properties": {"app_version": {"type": "string"}}
+    }
+  }
+}

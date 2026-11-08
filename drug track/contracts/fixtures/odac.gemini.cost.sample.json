@@ -1,0 +1,25 @@
+{
+ "corpus": "odac",
+ "backend": "gemini",
+ "labeler": "gemini-stand-in",
+ "model": "gemini-3.6-flash",
+ "stand_in": true,
+ "items": 226,
+ "wall_s": null,
+ "tokens": {
+  "input": 776236,
+  "output": 26409
+ },
+ "price": {
+  "input_per_m": 0.75,
+  "output_per_m": 3.75,
+  "source_url": "https://cloud.google.com/vertex-ai/generative-ai/pricing",
+  "checked": "2026-11-07"
+ },
+ "usd_total": 0.681211,
+ "usd_per_100": 0.3014,
+ "s_per_100": null,
+ "data_left_device": true,
+ "hardware": "Google Cloud (hosted Gemini API)",
+ "measured_at": "2026-11-07T17:49:37-05:00"
+}

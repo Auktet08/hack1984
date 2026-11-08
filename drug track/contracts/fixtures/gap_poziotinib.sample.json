@@ -1,0 +1,935 @@
+{
+ "drug": "poziotinib",
+ "built_at": "2026-11-07T19:30:00-05:00",
+ "provenance": {
+  "inputs": [
+   {
+    "file": "out/startup/labels/odac.jsonl",
+    "side": "private",
+    "rows": 226,
+    "labelers": [
+     "gemini-stand-in"
+    ],
+    "stand_in": true
+   },
+   {
+    "file": "out/startup/labels/probe.jsonl",
+    "side": "public",
+    "rows": 43,
+    "labelers": [
+     "gemini-stand-in"
+    ],
+    "stand_in": true
+   }
+  ],
+  "stand_in": true
+ },
+ "thresholds": {
+  "min_n": 3,
+  "split_delta": 1.5,
+  "thin_n": 5
+ },
+ "columns": [
+  {
+   "key": "fda",
+   "label": "FDA reviewers",
+   "side": "private",
+   "n_rows": 63
+  },
+  {
+   "key": "committee",
+   "label": "ODAC committee",
+   "side": "private",
+   "n_rows": 84
+  },
+  {
+   "key": "applicant",
+   "label": "Applicant (Spectrum)",
+   "side": "private",
+   "n_rows": 53
+  },
+  {
+   "key": "public_hearing",
+   "label": "Public hearing speakers",
+   "side": "private",
+   "n_rows": 26
+  },
+  {
+   "key": "public_record",
+   "label": "Public record",
+   "side": "public",
+   "n_rows": 43
+  }
+ ],
+ "aspects": [
+  "efficacy",
+  "safety",
+  "convenience",
+  "access_cost",
+  "evidence_quality"
+ ],
+ "cells": [
+  {
+   "aspect": "efficacy",
+   "column": "fda",
+   "n": 15,
+   "mean": -1.2,
+   "quotes": [
+    {
+     "item_id": "ODAC22-T046-1",
+     "span": "efficacy of poziotinib does not demonstrate a meaningful improvement over available therapy, given the low overall response rate and limited duration of response",
+     "polarity": -1,
+     "url": "https://www.fda.gov/advisory-committees/human-drug-advisory-committees/oncologic-drugs-advisory-committee"
+    },
+    {
+     "item_id": "ODAC22-T046-4",
+     "span": "efficacy of poziotinib, as demonstrated by the limited response rate with poor durability observed in the primary efficacy population, is not improved over available therapy",
+     "polarity": -1,
+     "url": "https://www.fda.gov/advisory-committees/human-drug-advisory-committees/oncologic-drugs-advisory-committee"
+    },
+    {
+     "item_id": "ODAC22-T046-5",
+     "span": "low at 28 percent, with poor durability demonstrated by a median DOR of 5.1 months",
+     "polarity": -1,
+     "url": "https://www.fda.gov/advisory-committees/human-drug-advisory-committees/oncologic-drugs-advisory-committee"
+    },
+    {
+     "item_id": "ODAC22-T054-1",
+     "span": "low overall response rate and poor duration of response",
+     "polarity": -1,
+     "url": "https://www.fda.gov/advisory-committees/human-drug-advisory-committees/oncologic-drugs-advisory-committee"
+    },
+    {
+     "item_id": "ODAC22-T054-2",
+     "span": "limited response rate with poor durability",
+     "polarity": -1,
+     "url": "https://www.fda.gov/advisory-committees/human-drug-advisory-committees/oncologic-drugs-advisory-committee"
+    }
+   ]
+  },
+  {
+   "aspect": "efficacy",
+   "column": "committee",
+   "n": 23,
+   "mean": 0.13,
+   "quotes": [
+    {
+     "item_id": "ODAC22-T117",
+     "span": "I found that side compelling",
+     "polarity": 1,
+     "url": "https://www.fda.gov/advisory-committees/human-drug-advisory-committees/oncologic-drugs-advisory-committee"
+    },
+    {
+     "item_id": "ODAC22-T126-1",
+     "span": "met its efficacy e ndpoint with some long -term benefits",
+     "polarity": 1,
+     "url": "https://www.fda.gov/advisory-committees/human-drug-advisory-committees/oncologic-drugs-advisory-committee"
+    },
+    {
+     "item_id": "ODAC22-T180-2",
+     "span": "appears to have some efficacy",
+     "polarity": 1,
+     "url": "https://www.fda.gov/advisory-committees/human-drug-advisory-committees/oncologic-drugs-advisory-committee"
+    },
+    {
+     "item_id": "ODAC22-T181-2",
+     "span": "some or many of ou r patients could potentially benefit from it",
+     "polarity": 1,
+     "url": "https://www.fda.gov/advisory-committees/human-drug-advisory-committees/oncologic-drugs-advisory-committee"
+    },
+    {
+     "item_id": "ODAC22-T183-1",
+     "span": "there is a response rate",
+     "polarity": 1,
+     "url": "https://www.fda.gov/advisory-committees/human-drug-advisory-committees/oncologic-drugs-advisory-committee"
+    }
+   ]
+  },
+  {
+   "aspect": "efficacy",
+   "column": "applicant",
+   "n": 25,
+   "mean": 1.16,
+   "quotes": [
+    {
+     "item_id": "ODAC22-T048-1",
+     "span": "poziotinib is clinically effective",
+     "polarity": 1,
+     "url": "https://www.fda.gov/advisory-committees/human-drug-advisory-committees/oncologic-drugs-advisory-committee"
+    },
+    {
+     "item_id": "ODAC22-T048-2",
+     "span": "The study met its prespecified endpoint.",
+     "polarity": 1,
+     "url": "https://www.fda.gov/advisory-committees/human-drug-advisory-committees/oncologic-drugs-advisory-committee"
+    },
+    {
+     "item_id": "ODAC22-T048-4",
+     "span": "The 16-milligram QD dose met the primary endpoint",
+     "polarity": 1,
+     "url": "https://www.fda.gov/advisory-committees/human-drug-advisory-committees/oncologic-drugs-advisory-committee"
+    },
+    {
+     "item_id": "ODAC22-T049-2",
+     "span": "poziotinib is an order of magnitude or more potent than other HER2 TKIs currently in the clinic",
+     "polarity": 1,
+     "url": "https://www.fda.gov/advisory-committees/human-drug-advisory-committees/oncologic-drugs-advisory-committee"
+    },
+    {
+     "item_id": "ODAC22-T049-7",
+     "span": "poziotinib is an effective oral treatment option",
+     "polarity": 1,
+     "url": "https://www.fda.gov/advisory-committees/human-drug-advisory-committees/oncologic-drugs-advisory-committee"
+    }
+   ]
+  },
+  {
+   "aspect": "efficacy",
+   "column": "public_hearing",
+   "n": 13,
+   "mean": 1.308,
+   "quotes": [
+    {
+     "item_id": "ODAC22-T147-2",
+     "span": "poziotinib will focus on their particular mutations",
+     "polarity": 1,
+     "url": "https://www.fda.gov/advisory-committees/human-drug-advisory-committees/oncologic-drugs-advisory-committee"
+    },
+    {
+     "item_id": "ODAC22-T151-3",
+     "span": "so many have extended their lives",
+     "polarity": 1,
+     "url": "https://www.fda.gov/advisory-committees/human-drug-advisory-committees/oncologic-drugs-advisory-committee"
+    },
+    {
+     "item_id": "ODAC22-T157-2",
+     "span": "the duration of stable disease for her was much longer than on any o ther of her previous lines of therapy",
+     "polarity": 1,
+     "url": "https://www.fda.gov/advisory-committees/human-drug-advisory-committees/oncologic-drugs-advisory-committee"
+    },
+    {
+     "item_id": "ODAC22-T159-2",
+     "span": "many patients have be nefited greatly from this drug",
+     "polarity": 1,
+     "url": "https://www.fda.gov/advisory-committees/human-drug-advisory-committees/oncologic-drugs-advisory-committee"
+    },
+    {
+     "item_id": "ODAC22-T159-3",
+     "span": "effective",
+     "polarity": 1,
+     "url": "https://www.fda.gov/advisory-committees/human-drug-advisory-committees/oncologic-drugs-advisory-committee"
+    }
+   ]
+  },
+  {
+   "aspect": "efficacy",
+   "column": "public_record",
+   "n": 34,
+   "mean": -0.088,
+   "quotes": [
+    {
+     "item_id": "PZ-0019",
+     "span": "marginal efficacy",
+     "polarity": -1,
+     "url": "https://www.reuters.com/business/healthcare-pharmaceuticals/us-fda-panel-votes-against-spectrums-lung-cancer-drug-2022-09-22"
+    },
+    {
+     "item_id": "PZ-0020",
+     "span": "current benefits of poziotinib did not outweigh its risks",
+     "polarity": -1,
+     "url": "https://www.businesswire.com/news/home/20220922005870/en/Spectrum-Pharmaceuticals-Provides-Update-on-Poziotinib-Following-FDA-Oncologic-Drugs-Advisory-Committee-Meeting"
+    },
+    {
+     "item_id": "PZ-0021",
+     "span": "poziotinib appears to be inferior to a product already available",
+     "polarity": -1,
+     "url": "https://www.medscape.com/viewarticle/981318"
+    },
+    {
+     "item_id": "PZ-0023",
+     "span": "current benefits of the oral, irreversible tyrosine kinase inhibitor poziotinib do not outweigh its risks",
+     "polarity": -1,
+     "url": "https://www.healio.com/news/hematology-oncology/20220923/fda-advisory-panel-votes-against-drugs-for-lung-cancer-multiple-myeloma-subgroups"
+    },
+    {
+     "item_id": "PZ-0026",
+     "span": "lack of meaningful benefit over currently available therapies",
+     "polarity": -1,
+     "url": "https://insights.citeline.com/PS147044/Poziotinib-Fails-To-Get-FDA-Panel-Support-Though-Members-Not-As-Dubious-As-Agency"
+    }
+   ]
+  },
+  {
+   "aspect": "safety",
+   "column": "fda",
+   "n": 18,
+   "mean": -1.333,
+   "quotes": [
+    {
+     "item_id": "ODAC22-T046-5",
+     "span": "high rate of toxicity observed with poziotinib at the proposed dosage",
+     "polarity": -1,
+     "url": "https://www.fda.gov/advisory-committees/human-drug-advisory-committees/oncologic-drugs-advisory-committee"
+    },
+    {
+     "item_id": "ODAC22-T046-8",
+     "span": "high rate of toxicity at the proposed dosage",
+     "polarity": -1,
+     "url": "https://www.fda.gov/advisory-committees/human-drug-advisory-committees/oncologic-drugs-advisory-committee"
+    },
+    {
+     "item_id": "ODAC22-T054-1",
+     "span": "high level of toxicity",
+     "polarity": -1,
+     "url": "https://www.fda.gov/advisory-committees/human-drug-advisory-committees/oncologic-drugs-advisory-committee"
+    },
+    {
+     "item_id": "ODAC22-T054-3",
+     "span": "Patients experienced high rates of toxicity with poziotinib",
+     "polarity": -1,
+     "url": "https://www.fda.gov/advisory-committees/human-drug-advisory-committees/oncologic-drugs-advisory-committee"
+    },
+    {
+     "item_id": "ODAC22-T054-6",
+     "span": "one quarter of patients requiring hospitalization due to grade 3 to 4 diarrhea",
+     "polarity": -1,
+     "url": "https://www.fda.gov/advisory-committees/human-drug-advisory-committees/oncologic-drugs-advisory-committee"
+    }
+   ]
+  },
+  {
+   "aspect": "safety",
+   "column": "committee",
+   "n": 16,
+   "mean": -0.562,
+   "quotes": [
+    {
+     "item_id": "ODAC22-T068",
+     "span": "you don't have data showing safety or efficacy",
+     "polarity": -1,
+     "url": "https://www.fda.gov/advisory-committees/human-drug-advisory-committees/oncologic-drugs-advisory-committee"
+    },
+    {
+     "item_id": "ODAC22-T126-1",
+     "span": "practically each patient facing significant toxicities",
+     "polarity": -1,
+     "url": "https://www.fda.gov/advisory-committees/human-drug-advisory-committees/oncologic-drugs-advisory-committee"
+    },
+    {
+     "item_id": "ODAC22-T164-1",
+     "span": "high rate of toxicity",
+     "polarity": -1,
+     "url": "https://www.fda.gov/advisory-committees/human-drug-advisory-committees/oncologic-drugs-advisory-committee"
+    },
+    {
+     "item_id": "ODAC22-T179",
+     "span": "patients can't tolerate the drug after initial clinical benefit",
+     "polarity": -1,
+     "url": "https://www.fda.gov/advisory-committees/human-drug-advisory-committees/oncologic-drugs-advisory-committee"
+    },
+    {
+     "item_id": "ODAC22-T181-1",
+     "span": "igh toxicity",
+     "polarity": -1,
+     "url": "https://www.fda.gov/advisory-committees/human-drug-advisory-committees/oncologic-drugs-advisory-committee"
+    }
+   ]
+  },
+  {
+   "aspect": "safety",
+   "column": "applicant",
+   "n": 18,
+   "mean": 0.5,
+   "quotes": [
+    {
+     "item_id": "ODAC22-T048-1",
+     "span": "safe",
+     "polarity": 1,
+     "url": "https://www.fda.gov/advisory-committees/human-drug-advisory-committees/oncologic-drugs-advisory-committee"
+    },
+    {
+     "item_id": "ODAC22-T048-3",
+     "span": "safety profile is typical of the TKI class with high rates of diarrhea and rash, with a low rat e of permanent discontinuation",
+     "polarity": 0,
+     "url": "https://www.fda.gov/advisory-committees/human-drug-advisory-committees/oncologic-drugs-advisory-committee"
+    },
+    {
+     "item_id": "ODAC22-T049-7",
+     "span": "favorable benefit-risk profile",
+     "polarity": 1,
+     "url": "https://www.fda.gov/advisory-committees/human-drug-advisory-committees/oncologic-drugs-advisory-committee"
+    },
+    {
+     "item_id": "ODAC22-T051-2",
+     "span": "manageable",
+     "polarity": 1,
+     "url": "https://www.fda.gov/advisory-committees/human-drug-advisory-committees/oncologic-drugs-advisory-committee"
+    },
+    {
+     "item_id": "ODAC22-T051-4",
+     "span": "the safety profile of poziotinib is similar to second -generation EGFR TKI",
+     "polarity": 0,
+     "url": "https://www.fda.gov/advisory-committees/human-drug-advisory-committees/oncologic-drugs-advisory-committee"
+    }
+   ]
+  },
+  {
+   "aspect": "safety",
+   "column": "public_hearing",
+   "n": 11,
+   "mean": 0.455,
+   "quotes": [
+    {
+     "item_id": "ODAC22-T147-2",
+     "span": "these side effects can be managed",
+     "polarity": 1,
+     "url": "https://www.fda.gov/advisory-committees/human-drug-advisory-committees/oncologic-drugs-advisory-committee"
+    },
+    {
+     "item_id": "ODAC22-T151-1",
+     "span": "side effects manageable",
+     "polarity": 1,
+     "url": "https://www.fda.gov/advisory-committees/human-drug-advisory-committees/oncologic-drugs-advisory-committee"
+    },
+    {
+     "item_id": "ODAC22-T151-2",
+     "span": "simple solutions work ed to counteract the side effects",
+     "polarity": 1,
+     "url": "https://www.fda.gov/advisory-committees/human-drug-advisory-committees/oncologic-drugs-advisory-committee"
+    },
+    {
+     "item_id": "ODAC22-T151-3",
+     "span": "manageable",
+     "polarity": 1,
+     "url": "https://www.fda.gov/advisory-committees/human-drug-advisory-committees/oncologic-drugs-advisory-committee"
+    },
+    {
+     "item_id": "ODAC22-T159-1",
+     "span": "manage the side effect s she experience d",
+     "polarity": 1,
+     "url": "https://www.fda.gov/advisory-committees/human-drug-advisory-committees/oncologic-drugs-advisory-committee"
+    }
+   ]
+  },
+  {
+   "aspect": "safety",
+   "column": "public_record",
+   "n": 19,
+   "mean": -1.0,
+   "quotes": [
+    {
+     "item_id": "PZ-0002",
+     "span": "Treatment-related AEs of any grade occurred in all pts treated with QD",
+     "polarity": -1,
+     "url": "https://www.annalsofoncology.org/article/S0923-7534(22)00044-8/fulltext"
+    },
+    {
+     "item_id": "PZ-0003",
+     "span": "most common grade 3 treatment-related adverse events were skin rash (47%) and diarrhea (20%)",
+     "polarity": -1,
+     "url": "https://ascopubs.org/doi/10.1200/JCO.21.01113"
+    },
+    {
+     "item_id": "PZ-0005",
+     "span": "The most common treatment-related Grade ≥3 AEs were rash (30%), diarrhea (26%), and mucosal inflammation (14%)",
+     "polarity": -1,
+     "url": "https://www.annalsofoncology.org/article/S0923-7534(20)42375-0/fulltext"
+    },
+    {
+     "item_id": "PZ-0008",
+     "span": "Grade 3 or higher treatment-related adverse events included rash (48.9%), diarrhea (25.6%), and stomatitis (24.4%)",
+     "polarity": -1,
+     "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8887939"
+    },
+    {
+     "item_id": "PZ-0013",
+     "span": "11 individuals, or 12%, permanently discontinuing because of adverse events (AEs)",
+     "polarity": -1,
+     "url": "https://www.pharmacytimes.com/view/spectrum-pharmaceuticals-submits-new-drug-application-for-poziotinib-for-nsclc"
+    }
+   ]
+  },
+  {
+   "aspect": "convenience",
+   "column": "fda",
+   "n": 0,
+   "mean": null,
+   "quotes": []
+  },
+  {
+   "aspect": "convenience",
+   "column": "committee",
+   "n": 3,
+   "mean": 0.0,
+   "quotes": [
+    {
+     "item_id": "ODAC22-T205-2",
+     "span": "isn't oral better than infused , I don't think that that's always the case",
+     "polarity": 0,
+     "url": "https://www.fda.gov/advisory-committees/human-drug-advisory-committees/oncologic-drugs-advisory-committee"
+    },
+    {
+     "item_id": "ODAC22-T216",
+     "span": "oral administration",
+     "polarity": 1,
+     "url": "https://www.fda.gov/advisory-committees/human-drug-advisory-committees/oncologic-drugs-advisory-committee"
+    },
+    {
+     "item_id": "ODAC22-T220",
+     "span": "the dosing schedule may not serve many of the patients",
+     "polarity": -1,
+     "url": "https://www.fda.gov/advisory-committees/human-drug-advisory-committees/oncologic-drugs-advisory-committee"
+    }
+   ]
+  },
+  {
+   "aspect": "convenience",
+   "column": "applicant",
+   "n": 5,
+   "mean": 1.0,
+   "quotes": [
+    {
+     "item_id": "ODAC22-T048-1",
+     "span": "oral",
+     "polarity": 1,
+     "url": "https://www.fda.gov/advisory-committees/human-drug-advisory-committees/oncologic-drugs-advisory-committee"
+    },
+    {
+     "item_id": "ODAC22-T049-5",
+     "span": "The TKIs are oral",
+     "polarity": 1,
+     "url": "https://www.fda.gov/advisory-committees/human-drug-advisory-committees/oncologic-drugs-advisory-committee"
+    },
+    {
+     "item_id": "ODAC22-T049-7",
+     "span": "prefer an oral regimen",
+     "polarity": 1,
+     "url": "https://www.fda.gov/advisory-committees/human-drug-advisory-committees/oncologic-drugs-advisory-committee"
+    },
+    {
+     "item_id": "ODAC22-T052-4",
+     "span": "patients who prefer oral treatment",
+     "polarity": 1,
+     "url": "https://www.fda.gov/advisory-committees/human-drug-advisory-committees/oncologic-drugs-advisory-committee"
+    },
+    {
+     "item_id": "ODAC22-T074",
+     "span": "patients often very commonly do favor the oral route of administratio n because of the convenience",
+     "polarity": 1,
+     "url": "https://www.fda.gov/advisory-committees/human-drug-advisory-committees/oncologic-drugs-advisory-committee"
+    }
+   ]
+  },
+  {
+   "aspect": "convenience",
+   "column": "public_hearing",
+   "n": 3,
+   "mean": 1.0,
+   "quotes": [
+    {
+     "item_id": "ODAC22-T153-2",
+     "span": "We like the idea of an oral therapy",
+     "polarity": 1,
+     "url": "https://www.fda.gov/advisory-committees/human-drug-advisory-committees/oncologic-drugs-advisory-committee"
+    },
+    {
+     "item_id": "ODAC22-T157-2",
+     "span": "she was not bound to clinic-based infusions and could have a relatively normal life",
+     "polarity": 1,
+     "url": "https://www.fda.gov/advisory-committees/human-drug-advisory-committees/oncologic-drugs-advisory-committee"
+    },
+    {
+     "item_id": "ODAC22-T159-3",
+     "span": "manageable",
+     "polarity": 1,
+     "url": "https://www.fda.gov/advisory-committees/human-drug-advisory-committees/oncologic-drugs-advisory-committee"
+    }
+   ]
+  },
+  {
+   "aspect": "convenience",
+   "column": "public_record",
+   "n": 3,
+   "mean": 1.0,
+   "quotes": [
+    {
+     "item_id": "PZ-0005",
+     "span": "Poziotinib (16 mg) was administered orally QD",
+     "polarity": 1,
+     "url": "https://www.annalsofoncology.org/article/S0923-7534(20)42375-0/fulltext"
+    },
+    {
+     "item_id": "PZ-0006",
+     "span": "oral, once daily dose",
+     "polarity": 1,
+     "url": "https://www.biospace.com/spectrum-pharmaceuticals-announces-positive-topline-results-in-her2-exon20-insertion-mutations-from-cohort-2-of-the-poziotinib-zenith20-trial"
+    },
+    {
+     "item_id": "PZ-0016",
+     "span": "oral once daily",
+     "polarity": 1,
+     "url": "https://www.1stoncology.com/blog/spectrum-pharmaceuticals-submits-new-drug-application-for-poziotinib1234596498"
+    }
+   ]
+  },
+  {
+   "aspect": "access_cost",
+   "column": "fda",
+   "n": 0,
+   "mean": null,
+   "quotes": []
+  },
+  {
+   "aspect": "access_cost",
+   "column": "committee",
+   "n": 0,
+   "mean": null,
+   "quotes": []
+  },
+  {
+   "aspect": "access_cost",
+   "column": "applicant",
+   "n": 0,
+   "mean": null,
+   "quotes": []
+  },
+  {
+   "aspect": "access_cost",
+   "column": "public_hearing",
+   "n": 0,
+   "mean": null,
+   "quotes": []
+  },
+  {
+   "aspect": "access_cost",
+   "column": "public_record",
+   "n": 0,
+   "mean": null,
+   "quotes": []
+  },
+  {
+   "aspect": "evidence_quality",
+   "column": "fda",
+   "n": 18,
+   "mean": -1.111,
+   "quotes": [
+    {
+     "item_id": "ODAC22-T046-7",
+     "span": "enrollment was not opened until well after submission of the NDA, and no patients have been enrolled as of this month",
+     "polarity": -1,
+     "url": "https://www.fda.gov/advisory-committees/human-drug-advisory-committees/oncologic-drugs-advisory-committee"
+    },
+    {
+     "item_id": "ODAC22-T054-7",
+     "span": "infrequent and incomplete collection of patient-reported symptoms",
+     "polarity": -1,
+     "url": "https://www.fda.gov/advisory-committees/human-drug-advisory-committees/oncologic-drugs-advisory-committee"
+    },
+    {
+     "item_id": "ODAC22-T055-2",
+     "span": "These insufficient data were not adequate to identify differences in safety or activity within this dosage range",
+     "polarity": -1,
+     "url": "https://www.fda.gov/advisory-committees/human-drug-advisory-committees/oncologic-drugs-advisory-committee"
+    },
+    {
+     "item_id": "ODAC22-T055-3",
+     "span": "patient numbers remain insu fficient to make a determination regarding the optimal dosage",
+     "polarity": -1,
+     "url": "https://www.fda.gov/advisory-committees/human-drug-advisory-committees/oncologic-drugs-advisory-committee"
+    },
+    {
+     "item_id": "ODAC22-T055-5",
+     "span": "applicant failed to adequately justify their proposed dosage",
+     "polarity": -1,
+     "url": "https://www.fda.gov/advisory-committees/human-drug-advisory-committees/oncologic-drugs-advisory-committee"
+    }
+   ]
+  },
+  {
+   "aspect": "evidence_quality",
+   "column": "committee",
+   "n": 16,
+   "mean": -1.0,
+   "quotes": [
+    {
+     "item_id": "ODAC22-T068",
+     "span": "you don't have data showing safety or efficacy",
+     "polarity": -1,
+     "url": "https://www.fda.gov/advisory-committees/human-drug-advisory-committees/oncologic-drugs-advisory-committee"
+    },
+    {
+     "item_id": "ODAC22-T099",
+     "span": "the FDA documents seem to indicate that it's much delayed, but the sponsor 's discussion seems to suggest it's well under way , although patient s are not enrolled",
+     "polarity": -1,
+     "url": "https://www.fda.gov/advisory-committees/human-drug-advisory-committees/oncologic-drugs-advisory-committee"
+    },
+    {
+     "item_id": "ODAC22-T170",
+     "span": "the fact that not one patient is enrolled is a problem",
+     "polarity": -1,
+     "url": "https://www.fda.gov/advisory-committees/human-drug-advisory-committees/oncologic-drugs-advisory-committee"
+    },
+    {
+     "item_id": "ODAC22-T188-1",
+     "span": "they provided health -related, quality-of-life data for patients that was largely incomplete",
+     "polarity": -1,
+     "url": "https://www.fda.gov/advisory-committees/human-drug-advisory-committees/oncologic-drugs-advisory-committee"
+    },
+    {
+     "item_id": "ODAC22-T195",
+     "span": "a lot of questions about what this means for our patients",
+     "polarity": -1,
+     "url": "https://www.fda.gov/advisory-committees/human-drug-advisory-committees/oncologic-drugs-advisory-committee"
+    }
+   ]
+  },
+  {
+   "aspect": "evidence_quality",
+   "column": "applicant",
+   "n": 4,
+   "mean": 0.0,
+   "quotes": [
+    {
+     "item_id": "ODAC22-T048-1",
+     "span": "largest data set in this rare disease",
+     "polarity": 1,
+     "url": "https://www.fda.gov/advisory-committees/human-drug-advisory-committees/oncologic-drugs-advisory-committee"
+    },
+    {
+     "item_id": "ODAC22-T050-4",
+     "span": "study was not a statistically powerful stratified subgroup analysis",
+     "polarity": -1,
+     "url": "https://www.fda.gov/advisory-committees/human-drug-advisory-committees/oncologic-drugs-advisory-committee"
+    },
+    {
+     "item_id": "ODAC22-T050-6",
+     "span": "number of patients is small",
+     "polarity": -1,
+     "url": "https://www.fda.gov/advisory-committees/human-drug-advisory-committees/oncologic-drugs-advisory-committee"
+    },
+    {
+     "item_id": "ODAC22-T114-2",
+     "span": "this is by far the large st study ever in this rare population",
+     "polarity": 1,
+     "url": "https://www.fda.gov/advisory-committees/human-drug-advisory-committees/oncologic-drugs-advisory-committee"
+    }
+   ]
+  },
+  {
+   "aspect": "evidence_quality",
+   "column": "public_hearing",
+   "n": 1,
+   "mean": -1.0,
+   "quotes": [
+    {
+     "item_id": "ODAC22-T163-4",
+     "span": "further confirmatory dosing studies are needed",
+     "polarity": -1,
+     "url": "https://www.fda.gov/advisory-committees/human-drug-advisory-committees/oncologic-drugs-advisory-committee"
+    }
+   ]
+  },
+  {
+   "aspect": "evidence_quality",
+   "column": "public_record",
+   "n": 8,
+   "mean": -0.75,
+   "quotes": [
+    {
+     "item_id": "PZ-0021",
+     "span": "concerns regarding the evidence of its clinical benefits",
+     "polarity": -1,
+     "url": "https://www.medscape.com/viewarticle/981318"
+    },
+    {
+     "item_id": "PZ-0023",
+     "span": "single-arm, phase 2 study",
+     "polarity": -1,
+     "url": "https://www.healio.com/news/hematology-oncology/20220923/fda-advisory-panel-votes-against-drugs-for-lung-cancer-multiple-myeloma-subgroups"
+    },
+    {
+     "item_id": "PZ-0026",
+     "span": "uncertain dosing, and delay in initiation of a confirmatory trial",
+     "polarity": -1,
+     "url": "https://insights.citeline.com/PS147044/Poziotinib-Fails-To-Get-FDA-Panel-Support-Though-Members-Not-As-Dubious-As-Agency"
+    },
+    {
+     "item_id": "PZ-0027",
+     "span": "lack of dose optimization",
+     "polarity": -1,
+     "url": "https://www.biospace.com/spectrum-pharma-shares-drop-30-percent-ahead-of-fda-advisory-committee-meeting"
+    },
+    {
+     "item_id": "PZ-0029",
+     "span": "inadequate data",
+     "polarity": -1,
+     "url": "https://www.reuters.com/business/healthcare-pharmaceuticals/us-fda-declines-approve-spectrum-pharmaceuticals-lung-cancer-drug-2022-11-25"
+    }
+   ]
+  }
+ ],
+ "flags": [
+  {
+   "flag_id": "F1",
+   "kind": "split",
+   "aspect": "efficacy",
+   "side": null,
+   "columns": [
+    "fda",
+    "public_hearing"
+   ],
+   "delta": 2.508,
+   "detail": "FDA reviewers -1.20 (n=15) vs Public hearing speakers +1.31 (n=13)",
+   "evidence": [
+    {
+     "item_id": "ODAC22-T046-1",
+     "span": "efficacy of poziotinib does not demonstrate a meaningful improvement over available therapy, given the low overall response rate and limited duration of response",
+     "url": "https://www.fda.gov/advisory-committees/human-drug-advisory-committees/oncologic-drugs-advisory-committee",
+     "column": "fda"
+    },
+    {
+     "item_id": "ODAC22-T147-2",
+     "span": "poziotinib will focus on their particular mutations",
+     "url": "https://www.fda.gov/advisory-committees/human-drug-advisory-committees/oncologic-drugs-advisory-committee",
+     "column": "public_hearing"
+    }
+   ]
+  },
+  {
+   "flag_id": "F2",
+   "kind": "split",
+   "aspect": "safety",
+   "side": null,
+   "columns": [
+    "fda",
+    "applicant"
+   ],
+   "delta": 1.833,
+   "detail": "FDA reviewers -1.33 (n=18) vs Applicant (Spectrum) +0.50 (n=18)",
+   "evidence": [
+    {
+     "item_id": "ODAC22-T046-5",
+     "span": "high rate of toxicity observed with poziotinib at the proposed dosage",
+     "url": "https://www.fda.gov/advisory-committees/human-drug-advisory-committees/oncologic-drugs-advisory-committee",
+     "column": "fda"
+    },
+    {
+     "item_id": "ODAC22-T048-1",
+     "span": "safe",
+     "url": "https://www.fda.gov/advisory-committees/human-drug-advisory-committees/oncologic-drugs-advisory-committee",
+     "column": "applicant"
+    }
+   ]
+  },
+  {
+   "flag_id": "F3",
+   "kind": "thin",
+   "aspect": "convenience",
+   "side": "public",
+   "columns": [
+    "public_record"
+   ],
+   "delta": null,
+   "detail": "convenience: 11 meeting mentions, 3 public-record mentions (thin below 5)",
+   "evidence": [
+    {
+     "item_id": "PZ-0005",
+     "span": "Poziotinib (16 mg) was administered orally QD",
+     "url": "https://www.annalsofoncology.org/article/S0923-7534(20)42375-0/fulltext",
+     "column": "public_record"
+    }
+   ]
+  },
+  {
+   "flag_id": "F4",
+   "kind": "thin",
+   "aspect": "access_cost",
+   "side": "both",
+   "columns": [
+    "fda",
+    "committee",
+    "applicant",
+    "public_hearing",
+    "public_record"
+   ],
+   "delta": null,
+   "detail": "access and cost: 0 meeting mentions, 0 public-record mentions (thin below 5)",
+   "evidence": []
+  }
+ ],
+ "questions": [
+  {
+   "question_id": "Q1",
+   "flag_id": "F1",
+   "text": "FDA reviewers rated poziotinib's efficacy -1.2 (15 mentions), but public hearing speakers rated it +1.3 (13). Which view matches what your patients see, and why?",
+   "citations": [
+    {
+     "item_id": "ODAC22-T046-1",
+     "span": "efficacy of poziotinib does not demonstrate a meaningful improvement over available therapy, given the low overall response rate and limited duration of response",
+     "url": "https://www.fda.gov/advisory-committees/human-drug-advisory-committees/oncologic-drugs-advisory-committee",
+     "column": "fda"
+    },
+    {
+     "item_id": "ODAC22-T147-2",
+     "span": "poziotinib will focus on their particular mutations",
+     "url": "https://www.fda.gov/advisory-committees/human-drug-advisory-committees/oncologic-drugs-advisory-committee",
+     "column": "public_hearing"
+    }
+   ],
+   "counts": {
+    "fda": 15,
+    "public_hearing": 13
+   }
+  },
+  {
+   "question_id": "Q2",
+   "flag_id": "F2",
+   "text": "FDA reviewers rated poziotinib's safety -1.3 (18 mentions), but applicant (spectrum) rated it +0.5 (18). Which view matches what your patients see, and why?",
+   "citations": [
+    {
+     "item_id": "ODAC22-T046-5",
+     "span": "high rate of toxicity observed with poziotinib at the proposed dosage",
+     "url": "https://www.fda.gov/advisory-committees/human-drug-advisory-committees/oncologic-drugs-advisory-committee",
+     "column": "fda"
+    },
+    {
+     "item_id": "ODAC22-T048-1",
+     "span": "safe",
+     "url": "https://www.fda.gov/advisory-committees/human-drug-advisory-committees/oncologic-drugs-advisory-committee",
+     "column": "applicant"
+    }
+   ],
+   "counts": {
+    "fda": 18,
+    "applicant": 18
+   }
+  },
+  {
+   "question_id": "Q3",
+   "flag_id": "F3",
+   "text": "Poziotinib's convenience barely comes up in the public record (11 meeting mentions, 3 public). What do your patients and practices see on convenience?",
+   "citations": [
+    {
+     "item_id": "PZ-0005",
+     "span": "Poziotinib (16 mg) was administered orally QD",
+     "url": "https://www.annalsofoncology.org/article/S0923-7534(20)42375-0/fulltext",
+     "column": "public_record"
+    }
+   ],
+   "counts": {
+    "private": 11,
+    "public": 3
+   }
+  },
+  {
+   "question_id": "Q4",
+   "flag_id": "F4",
+   "text": "Poziotinib's access and cost barely comes up in either the meeting or the public record (0 meeting mentions, 0 public). What do your patients and practices see on access and cost?",
+   "citations": [],
+   "counts": {
+    "private": 0,
+    "public": 0
+   }
+  }
+ ]
+}
