@@ -15,7 +15,7 @@ execution: code
 - **Means:** six lanes (A–F) built in parallel against fixed file contracts with committed fixtures (KTD1), on Gemini stand-in labels now, with a one-flag swap to the local model later (KD1, KTD2).
 - **Authority:** `drug track/README.md` and `drug track/LABELING_GUIDE.md` win over everything. Next comes `CLAUDE.md` (experiment protocol, test-set rules), then `drug track/STARTUP.md` for the product and pitch (its presenter rules in §1 bind lane F), then this plan. Inside this plan, R-IDs win on behaviour and KTDs win on mechanism. The local model itself belongs to `docs/plans/2026-11-07-1710-local-model-handoff.md`.
 - **Stop conditions:** Code freezes Sun 09:00. If time runs short, cut in `STARTUP.md` §7 order: U8 (the mobocertinib slide) first, then U3's questions (the gap grid stays), then U7 and U6. Never touch the safety-net `drug track/out/submission.jsonl`. A lane that isn't done by 06:00 ships whatever passes its fixture tests.
-- **Execution profile:** three people, network on. Owners are proposed because `PROBLEM.md` §10 roles aren't agreed: North for U1–U3, U11 and U12; T2 for U4 and U5; T3 for U6–U10. U12 needs the Mac and handoff stage 5.
+- **Execution profile:** three people, network on. North takes U1–U3 and U6–U12, which covers all the research, the pitch and every Gemini run, so that T3 can stay on optimizing the local model (the handoff plan) with no lane units (user-directed, 2026-11-07). T2 takes U13, U4 and U5. U12 needs the Mac and handoff stage 5.
 - **Who finishes:** each lane owner lands their units. North runs the final rebuild on the Mac (labels, triage, gap, cost) and the demo build.
 
 ---
@@ -24,11 +24,11 @@ execution: code
 
 ### Summary
 
-Build four demo pieces on the transcript and stand-in labels we already have: a rules-based side-effect triage flag with an audit log, a gap view that turns speaker disagreement and thin coverage into advisory-board questions, a localhost UI for both, and a checked pitch deck. In parallel, finish the optional mobocertinib analog slide. File contracts and fixtures come first so the UI never waits on the builders. The local model later replaces Gemini with one flag, and everything downstream rebuilds unchanged.
+Build four demo pieces on the transcript and stand-in labels we already have: a rules-based side-effect triage flag with an audit log, a gap view that turns speaker disagreement and thin coverage into advisory-board questions, screens for both added to T2's existing webpage once we've inspected it, and a checked pitch deck. In parallel, finish the optional mobocertinib analog slide. File contracts and fixtures come first so the UI never waits on the builders. The local model later replaces Gemini with one flag, and everything downstream rebuilds unchanged.
 
 ### Problem Frame
 
-The startup pitch (`drug track/STARTUP.md`) rests on things that don't exist yet. The side-effect flag is the privacy-first core and the way into accounts (§4, §8), but there is no code for it. The gap view is the main reason we need both Tavily/Exa and a local model (ideation idea 1), but its numbers exist only as a table in §6. There's no app at all: `drug track/app/` is absent and nothing in the repo serves a page. The slides depend on facts that still need primary-source checks, and research for this plan found two of them wrong (see Sources).
+The startup pitch (`drug track/STARTUP.md`) rests on things that don't exist yet. The side-effect flag is the privacy-first core and the way into accounts (§4, §8), but there is no code for it. The gap view is the main reason we need both Tavily/Exa and a local model (ideation idea 1), but its numbers exist only as a table in §6. T2 already has a webpage, but it isn't in the repo on any branch yet, so nobody else knows what it covers, what it runs on, or whether it works offline. The slides depend on facts that still need primary-source checks, and research for this plan found two of them wrong (see Sources).
 
 Three people build this overnight before an 11:00 deadline, mostly in parallel with North's model pipeline. Without fixed formats between the lanes, the UI waits on the builders and every relabel breaks a screen. The labels are Gemini stand-ins for now (`PROBLEM.md` decision 9), so the demo is only honest if each screen says which labeler it shows.
 
@@ -81,6 +81,7 @@ Three people build this overnight before an 11:00 deadline, mostly in parallel w
 - KD4. **Reviewer decisions go to an append-only log through a small local server.** (session-settled: user-approved — chosen over static files, where a decision would vanish on reload.) Governs R7, R10.
 - KD5. **Lane A's slide says its labels came from the Gemini stand-in unless lane E relabels it in time.** (session-settled: user-approved — chosen over showing it unlabeled.) Governs R14.
 - KD6. **"Doesn't fire" means no candidate badge, not a hidden record.** Market-research guidance forwards group-level side effects too (EPHMRA 2024 §3.2, ABPI/BHBIA 2021 §3.2.2), so an incomplete record stays on screen with its missing criterion named. Governs R6.
+- KD7. **Lane D starts by inspecting T2's existing webpage and adds the demo screens to it, instead of building a new app.** (session-settled: user-directed — chosen over a new app in `drug track/app/`: T2 already has a page.) U4 and U5 describe what the page must end up doing, and U13 decides which of those parts already exist. Governs R10, R11.
 
 ### Acceptance Examples
 
@@ -154,7 +155,7 @@ Three people build this overnight before an 11:00 deadline, mostly in parallel w
   - Rows with `source: fda_event` are excluded, since they're negative by construction (`STARTUP.md` §7, S6).
   - Inherits KD3's label. Covers R8, R9.
 - KTD8. **Template questions are deterministic, with no model call.** There's one template per flag kind, filled with the drug, aspect wording, column labels, means and counts. Each question cites one quote per side, choosing the quote whose polarity is nearest that column's mean. A thin flag with no quotes cites the counts instead. The output is offline and reproducible, and every question carries evidence. Example: "FDA reviewers rated poziotinib's efficacy −1.2 (15 mentions), but patients at the public hearing rated it +1.3 (13). Which view matches what your patients see, and why?" Covers R9.
-- KTD9. **Demo app: FastAPI, as `PROBLEM.md` §8 already decides, plus one static HTML/JS/CSS page with no CDN scripts or web fonts.** It binds to 127.0.0.1, reads the files on every request so a rebuild shows on reload, and pins its dependencies in `drug track/app/requirements.txt`. FastAPI isn't installed on North's laptop (uvicorn and starlette are), and the Mac needs the same install before the network goes off. Covers R10.
+- KTD9. **Demo app: T2's existing webpage, extended (KD7). The fallback, if U13 finds the page can't meet the rules below in the time left, is FastAPI plus one static HTML/JS/CSS page, as `PROBLEM.md` §8 decides.** Whatever it runs on binds to 127.0.0.1, loads no CDN scripts, web fonts or other external assets, reads the files on every request so a rebuild shows on reload, and pins its dependencies. If the page has no server that can take the decision endpoint (KD4), add a small FastAPI one beside it. FastAPI isn't installed on North's laptop (uvicorn and starlette are), and the Mac needs every dependency installed before the network goes off. Covers R10.
 - KTD10. **Tests use the standard library's `unittest` under `drug track/tests/`, with `jsonschema` for contract checks.** pytest isn't installed, and the repo has no tests yet. `jsonschema` 4.26 is installed here and goes in the app's requirements for the Mac.
 - KTD11. **S1 reuses `drug track/src/startup/exa_harvest.py` with a new query file and one new option.**
   - The query file `queries_mobocertinib.json` uses prefix `MQ`, so IDs never collide with the probe's `MB-` items.
@@ -262,30 +263,32 @@ U1 writes these as JSON Schemas under `drug track/contracts/`. The field lists b
 
 ### Sequencing
 
-| Time (EST) | North | T2 (app) | T3 (research, pitch) |
+| Time (EST) | North (builders, research, pitch, Gemini) | T2 (app) | T3 (local model) |
 |---|---|---|---|
-| Sat 19:00–20:30 | U1, U11 | U4 scaffold from the field lists above | U6 harvest and label run; start U9 |
-| 20:30–24:00 | U2, U3 (between handoff stages) | U4, then U5 on fixtures | U7; U9 |
-| Overnight | Mac model work per the handoff plan | — | — |
-| Sun 06:00–08:30 | Copy `drug track/out/startup/` to the Mac, since git doesn't carry it. On the Mac, rerun only triage, gap and cost, and relabel only with `--backend local` (U12, if stage 5 is ready) | U5 on real outputs; walk the demo pair | U8; U10 |
-| 09:00 | Code freeze | App runs on the Mac | Facts frozen |
+| Sat 19:00–20:30 | U1, U11; U13 with T2 (about 30 min); start U6's harvest and Gemini label run; start U9 | U13: push the existing page and inspect it with North; then start U4 on what it lacks, from the field lists above | The handoff plan; no lane units |
+| 20:30–24:00 | U2 and U3 as separate Claude sessions; U7; U9 | U4, then U5 on fixtures | The handoff plan |
+| Overnight | Finish U9; draft U10 | — | Mac model work per the handoff plan |
+| Sun 06:00–08:30 | Copy `drug track/out/startup/` to the Mac, since git doesn't carry it. On the Mac, rerun only triage, gap and cost, and relabel only with `--backend local` (U12, if stage 5 is ready). Then U8 and U10 | U5 on real outputs; walk the demo pair | Handoff stage 5, so U12 can run |
+| 09:00 | Code freeze; facts frozen | App runs on the Mac | Code freeze |
 
 ### Risks and Dependencies
 
 | Risk | Mitigation |
 |---|---|
-| North carries U1–U3 and U11–U12 on top of the model pipeline | U1 lands first, so U2 and U3 can move to T2 or T3 if the handoff stages slip. Both are pure Python with fixture-backed tests. |
+| North carries U1–U3 and U6–U12: contracts, builders, research, pitch and every Gemini run | T3 stays on the local model and takes no lane units. U1 lands first, and U2 and U3 are pure Python with fixture-backed tests, so they can run as separate Claude sessions or move to T2. If the night runs short, cut in the stop-condition order: U8, then U3's questions, then U7 and U6. |
 | The side-effect term list misses wording, and its recall is unmeasured | Incomplete records stay visible (KD6). The pitch says "triage candidate". The reviewer still sees every turn that has a side-effect term. |
 | The patient rule fires on a hypothetical ("if my patient got a rash…") | The reviewer decides, and the dismissal is logged. This is acceptable for a triage aid. |
 | Handoff stage 5 misses the 09:00 freeze, so U12 can't run | The demo runs on stand-in labels with badges (R3). The flag and gap math still run offline, and the presenter says so. |
 | Slide facts are wrong: "15 months" should be about 14, the EPHMRA year (STARTUP says 2025, the version found is July 2024), and Pierce counts posts, not cases | U9 corrects them before U10 uses them (R15). |
 | A FastAPI install on the Mac fails with the network off | Install from `drug track/app/requirements.txt` on the Mac before going offline, as part of U4's verification. |
+| T2's page relies on a CDN, web fonts, a hosted API or a build step that needs the network | U13 checks this first. Vendor the assets locally, or fall back to KTD9's FastAPI page for the demo screens. |
 
 ### Open Questions
 
 Nothing here blocks implementation.
 
-- Owners for T2 and T3 (`PROBLEM.md` §10 is still a draft).
+- `PROBLEM.md` §10 still lists research and pitch under Teammate 3. Update it to match this plan.
+- Where T2's page lives, what it runs on, and what it already shows. U13 answers this before U4 and U5 start.
 - The slide tool (Google Slides, Keynote or a slides artifact) is the deck owner's choice. `drug track/pitch/deck.md` stays the source of the text.
 - Which Gemini price page matches the key's billing (Developer API or Google Cloud)? U11 records the page it used.
 - Is there a 2025 revision of EPHMRA's AE guidelines? U9 checks, and otherwise cites July 2024.
@@ -320,7 +323,7 @@ drug track/
     exa_harvest.py                  # --exclude-items (U6)
     label.py                        # mobocertinib corpus (U6), cost file (U11), local backend (U12)
   research/knowledge/mobocertinib_pack.json   # new (U7)
-  app/
+  app/                              # fallback layout; U13 decides where T2's page and these pieces live
     server.py
     requirements.txt
     static/index.html, app.js, app.css
@@ -342,7 +345,8 @@ drug track/
 | U1 | Contracts, schemas and fixtures | `drug track/contracts/*`, `drug track/tests/test_contracts.py` | — |
 | U2 | Side-effect triage builder (B) | `drug track/src/startup/triage.py`, `ae_terms.json` | U1 |
 | U3 | Gap view builder (C) | `drug track/src/startup/gap_view.py` | U1 |
-| U4 | Demo app server and audit endpoint (D) | `drug track/app/server.py` | U1 |
+| U13 | Inspect T2's webpage and decide what to add (D) | T2's existing page | — |
+| U4 | Demo app server and audit endpoint (D) | `drug track/app/server.py` | U1, U13 |
 | U5 | Demo app screens (D) | `drug track/app/static/*` | U4 |
 | U6 | Mobocertinib quarterly harvest and labels (A, S1) | `queries_mobocertinib.json`, `tavily_harvest.py`, `exa_harvest.py`, `label.py` | — |
 | U7 | Mobocertinib pack (A, S2) | `drug track/research/knowledge/mobocertinib_pack.json` | — |
@@ -431,12 +435,36 @@ drug track/
 
 ### Phase 3: demo UI (lane D)
 
+### U13. Inspect T2's webpage and decide what to add
+
+- **Goal:** know what T2's existing page already does before building anything for lane D, so U4 and U5 cover only what's missing.
+- **Requirements:** R3, R6, R7, R10, R11 (KD7, KTD9).
+- **Dependencies:** none. North and T2 do it together at the start of the night (about 30 minutes).
+- **Files:** T2's page, wherever it lives today. As of Sat 2026-11-07 evening it isn't in the repo on any branch.
+- **Approach:**
+  1. T2 pushes the page to a branch (`lane-d-app`), so the other lanes can see and run it.
+  2. Run it locally and walk through it against this checklist:
+     - **Screens:** which of these already exist: labeled transcript turns with highlighted quotes, the triage panel (four criteria, decision buttons, history), the gap grid with its questions, the cost panel, and the labeler badge.
+     - **Data:** which files it reads and in what shape, and whether it can read label rows (`drug track/LABELS.md`) and the File Contracts files directly or needs an adapter.
+     - **Server:** whether it has a backend that can take the decision POST and append to the audit log (KD4), or only serves static files.
+     - **Offline:** CDN scripts, web fonts, hosted APIs, analytics, or a build step that needs the network. Each one breaks R10 and R18 on the Mac.
+     - **Wording:** anything that says "reportable", or that presents stand-in labels as local (R3, R6).
+     - **Stack:** framework, how it starts, and what the Mac must install before the network goes off.
+  3. Fill in the keep / add / change table under "U13 findings" below, and trim U4 and U5 to its "add" and "change" rows.
+  4. If the page can't meet KTD9's rules in the time left, switch to the fallback (the FastAPI page) and record why.
+- **Test scenarios:** Test expectation: none -- an inspection. Its output is the findings table.
+- **Verification:** the findings table is filled in, U4 and U5 list only what's missing, and T2 agrees with the scope.
+
+#### U13 findings
+
+_To fill in after the inspection: one row per screen or behaviour from the checklist, marked keep, add or change._
+
 ### U4. Demo app server and audit endpoint
 
-- **Goal:** a localhost FastAPI app that serves label rows, triage records with their latest decision, the gap view and cost files, and appends reviewer decisions.
+- **Goal:** the server side of the demo, added to T2's page (KD7). It serves label rows, triage records with their latest decision, the gap view and cost files, and appends reviewer decisions.
 - **Requirements:** R7, R10, R11, R3 (KD4, KTD6, KTD9).
-- **Dependencies:** U1. U2, U3 and U11 replace fixtures when they land, with no code change.
-- **Files:** create `drug track/app/server.py`, `drug track/app/requirements.txt` (pinned `fastapi`, `uvicorn`, `jsonschema`) and `drug track/tests/test_app_data.py`.
+- **Dependencies:** U1, and U13, which sets how much of this already exists. U2, U3 and U11 replace fixtures when they land, with no code change.
+- **Files:** in the fallback layout, create `drug track/app/server.py`, `drug track/app/requirements.txt` (pinned `fastapi`, `uvicorn`, `jsonschema`) and `drug track/tests/test_app_data.py`. If U13 finds a server to extend, the same behaviour and tests go there instead.
 - **Approach:**
   1. A data layer of pure functions loads each file from `drug track/out/startup/` and falls back to `drug track/contracts/fixtures/`. Every response reports `data_source: "real" | "fixture"`.
   2. Read-only endpoints: label rows by corpus, triage records by corpus (each merged with its latest audit decision and decision history), the gap view by drug, and every `<corpus>.<backend>.cost.json`, both backends side by side.
@@ -455,10 +483,10 @@ drug track/
 
 ### U5. Demo app screens
 
-- **Goal:** three views (Transcript, Triage, Gap) plus cost and labeler badges, covering the demo flow in `STARTUP.md` §7.
+- **Goal:** three views (Transcript, Triage, Gap) plus cost and labeler badges, covering the demo flow in `STARTUP.md` §7, added to T2's page. U13 decides which already exist.
 - **Requirements:** R3, R6, R10, R11.
-- **Dependencies:** U4.
-- **Files:** create `drug track/app/static/index.html`, `drug track/app/static/app.js` and `drug track/app/static/app.css`.
+- **Dependencies:** U4, U13.
+- **Files:** T2's page files. In the fallback layout, create `drug track/app/static/index.html`, `drug track/app/static/app.js` and `drug track/app/static/app.css`.
 - **Approach:**
   - **Header:** the data source ("fixture data" or "real"), and the labeler shown as either "Gemini 3.6 Flash stand-in, network on" or "local <model>, offline". The badge reads the row's `meta.stand_in` or the file's `provenance.stand_in`.
   - **Transcript:** turns with speaker name, group and role chips, and a section filter. Aspects show their polarity, with each quote highlighted at its offset and a "verbatim ✓" mark on substring match. Turns with a triage record carry a marker linking to it.
@@ -612,7 +640,7 @@ drug track/
 | Contract check | `python3 "drug track/contracts/validate.py"`: fixtures always, real outputs when present | U1–U3, U11, U12 |
 | Triage build | `python3 "drug track/src/startup/triage.py" --corpus odac` | U2, U12 |
 | Gap build | `python3 "drug track/src/startup/gap_view.py" --drug poziotinib` | U3, U12 |
-| App smoke | Run uvicorn on 127.0.0.1 from `drug track/app/`, then walk AE1, AE2, AE3 and AE5 in the browser | U4, U5 |
+| App smoke | Start the app on 127.0.0.1 (uvicorn from `drug track/app/` in the fallback layout), then walk AE1, AE2, AE3 and AE5 in the browser | U4, U5 |
 | Offline proof | Network off (Mac Wi-Fi off, or `unshare -rn` on Linux), then label (local) → triage → gap → app | U12 |
 | Research hygiene | Every Tavily/Exa call has a row in `drug track/research/ledger.jsonl`, and no query contains item text (RESEARCH_README R1, R6) | U6, U7, U9 |
 | Safety net | `drug track/out/submission.jsonl` stays 240 valid lines and is never touched by these units | all |
@@ -632,6 +660,7 @@ These units change no dev-scored output, so `score_dev.sh` and `log_exp.py` don'
   - Experimental or abandoned code is removed from the diff.
 - **U1:** the schemas and fixtures are committed and validate, and T2 has started from them.
 - **U2/U3:** real outputs exist, validate, and show AE1–AE4.
+- **U13:** the findings table is filled in, and U4 and U5 are trimmed to match.
 - **U4/U5:** the app runs offline on the Mac, and a decision survives a restart.
 - **U6–U8 (optional):** the items, pack and verdict exist, and the slide matches the verdict, or the unit was cut in `STARTUP.md` §7 order.
 - **U9/U10:** `FACTS.md` covers every deck number, and the close is rehearsed.
