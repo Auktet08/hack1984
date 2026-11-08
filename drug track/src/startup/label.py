@@ -9,10 +9,8 @@ Output contract (what the UI and the analysis read): out/startup/labels/<corpus>
 item fields (plus speaker fields for transcripts), the track labels (signal_type, actionable, five aspects with
 span/polarity/speaker) and meta {labeler, model, stand_in, labeled_at}.
 
-**Backend.** Until the local Qwen3.5-2B is trained (docs/plans/2026-11-07-1710-local-model-handoff.md), the default
-backend is Gemini Flash, as a STAND-IN for the local model. Every row says so in meta.stand_in, so nothing
-downstream can present these labels as local or network-off output. The local backend must write the same file;
-switching is --backend local, nothing else changes.
+Use --backend local to label through a loopback llama-server. The default Gemini backend remains a public-data
+stand-in, identified by meta.stand_in.
 
 Only public material goes to Gemini (FDA transcript, public news and papers). Never test items, never customer data.
 """
@@ -49,16 +47,26 @@ def run_gemini(items_path, out_path, focus, jobs):
     return checked, ",".join(stats["models_served"]) or "gemini", stats
 
 
+def run_local(rows, focus, url, model):
+    sys.path.insert(0, str(PKG / "src/inference"))
+    from predict_full import label_local
+
+    cache = PKG / "out/model_cache"
+    cache.mkdir(parents=True, exist_ok=True)
+    context = f"Target drug and setting: {focus}. Judge claims about this drug as stated by the source."
+    labels = {r["item_id"]: label_local(r, url, model, cache, context) for r in rows}
+    return labels, model, {"labeled": len(labels), "failed": 0}
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--corpus", choices=sorted(CORPORA), required=True)
     ap.add_argument("--backend", choices=["gemini", "local"], default="gemini")
     ap.add_argument("--limit", type=int, default=0)
     ap.add_argument("--jobs", type=int, default=8)
+    ap.add_argument("--local-url", default="http://127.0.0.1:18080/v1/chat/completions")
+    ap.add_argument("--local-model", default="qwen3.5-2b")
     a = ap.parse_args()
-    if a.backend == "local":
-        sys.exit("The local backend isn't wired yet: it lands with handoff stage 5 (Ollama at localhost:11434). "
-                 "It must write the same out/startup/labels/<corpus>.jsonl rows, with meta.stand_in = false.")
 
     src, product_map, keep = CORPORA[a.corpus]
     rows = [r for r in load(src) if keep(r)][: a.limit or None]
@@ -68,14 +76,17 @@ def main():
         group = [dict(r, product=focus_key) for r in rows if r["product"] == prod]
         if not group:
             continue
-        items_path = OUTDIR / f"{a.corpus}_{focus_key}.items.jsonl"
-        with open(items_path, "w") as f:
-            for r in group:
-                f.write(json.dumps(r, ensure_ascii=False) + "\n")
-        got, model, stats = run_gemini(items_path, OUTDIR / f"{a.corpus}_{focus_key}.gemini.jsonl",
-                                       FOCUS[focus_key], a.jobs)
+        if a.backend == "local":
+            got, model, stats = run_local(group, FOCUS[focus_key], a.local_url, a.local_model)
+        else:
+            items_path = OUTDIR / f"{a.corpus}_{focus_key}.items.jsonl"
+            with open(items_path, "w") as f:
+                for r in group:
+                    f.write(json.dumps(r, ensure_ascii=False) + "\n")
+            got, model, stats = run_gemini(items_path, OUTDIR / f"{a.corpus}_{focus_key}.gemini.jsonl",
+                                           FOCUS[focus_key], a.jobs)
         labels.update({k: (v, model) for k, v in got.items()})
-        stats_all[focus_key] = {k: stats[k] for k in ("labeled", "failed", "span_check", "tokens")}
+        stats_all[focus_key] = {k: stats[k] for k in ("labeled", "failed", "span_check", "tokens") if k in stats}
 
     out = OUTDIR / f"{a.corpus}.jsonl"
     now = time.strftime("%Y-%m-%dT%H:%M:%S%z")
@@ -88,7 +99,8 @@ def main():
             prod = product_map[r["product"]]
             row = dict(r, product=prod, signal_type=lab["signal_type"], actionable=lab["actionable"],
                        **{x: lab[x] for x in ASPECTS},
-                       meta={"labeler": f"{a.backend}-stand-in", "model": model, "stand_in": True,
+                       meta={"labeler": "local" if a.backend == "local" else "gemini-stand-in",
+                             "model": model, "stand_in": a.backend == "gemini",
                              "labeled_at": now})
             fo.write(json.dumps(row, ensure_ascii=False) + "\n")
             n += 1

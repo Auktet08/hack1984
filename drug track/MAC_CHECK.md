@@ -150,3 +150,69 @@ Repeat the failed step with the fallback model:
 | 4. llama.cpp JSON | | valid JSON? prompt_per_second, predicted_per_second |
 | 5. Fallback (if used) | | which model, what worked |
 | Overnight OK? | | |
+
+## Verified on this checkout
+
+- Apple M6, 24 GiB unified memory, macOS 27.0, native Python 3.11.18. MLX 0.32.4, mlx-lm 0.32.2 and llama.cpp 0.9.0.
+- Ollama serves `qwen3.5:2b` (2.2B parameters, MXFP8). Its structured-output endpoint returned HTTP 501. The local Q8_0 llama.cpp server accepted the JSON schema on all 40 model calls in the 60-item dev baseline.
+- MLX loaded the base model and emitted JSON with thinking disabled. Unquantized training at a 4,096-token limit and the first 4-bit run at a 3,072-token limit both ran out of Metal memory.
+- The 20-step smoke test completed with 4-bit affine weights, 4 adapter layers, batch size 1, a 1,152-token limit, gradient checkpointing and MLX compilation disabled. Validation loss went from 0.924 to 0.219 on two validation batches.
+- The adapter fused and converted to Q8_0 with the llama.cpp converter using Transformers 5.22.2. The converted model loaded and returned valid schema on five dev smoke items using a single 8,192-token llama.cpp slot.
+
+## Reproduce the local run
+
+Run from `drug track/`. Restore the organizer data before going offline. Model weights and outputs are ignored by Git.
+
+```bash
+# Public test run, terminal 1. Serve the scored adapter.
+llama-server -m models/qwen35-2b-lora-v1.q8_0.gguf --jinja \
+  --host 127.0.0.1 --port 18083 -c 16384 --parallel 2 --no-kv-unified --cache-ram 0
+
+# Terminal 2. Only the guided signal override passed the gate.
+./run_offline.sh data/test_inputs.full.jsonl out/submission.jsonl \
+  --url http://127.0.0.1:18083/v1/chat/completions --model qwen35-2b-lora-v1 \
+  --guide LABELING_GUIDE.md --model-signal
+python3 src/inference/check_submission.py data/test_inputs.full.jsonl out/submission.jsonl
+
+# Transcript run, terminal 1. Use the local Q8_0 file for the base Qwen3.5-2B.
+llama-server -m models/qwen35-2b-base.q8_0.gguf --jinja \
+  --host 127.0.0.1 --port 18080 -c 8192 --parallel 1 --cache-ram 0
+
+# Terminal 2. Each input row is one speaker turn and includes speaker_role.
+./run_offline.sh turns.jsonl out/transcript-labels.jsonl --transcripts
+```
+
+`run_offline.sh` restricts the predictor to loopback networking on macOS. The predictor connects directly to the local server without proxies or redirects. Keep external networking disabled on the host during the judge run.
+
+The base weight file is `Qwen3.5-2B-Q8_0.gguf` from `unsloth/Qwen3.5-2B-GGUF`, revision `f6d5376be1edb4d416d56da11e5397a961aca8ae`. The adapter was trained with the 4-bit affine conversion of `Qwen/Qwen3.5-2B`, revision `15852e8c16360a2fea060d615a32b45270f8a8fc`. After creating that local MLX conversion, repeat the training with the commands below.
+
+```bash
+out/mac/venv/bin/python src/train/make_lora_data.py \
+  --tokenizer models/qwen35-2b-mlx-affine4 --max-tokens 1152
+HF_HUB_OFFLINE=1 out/mac/venv/bin/python \
+  -c 'import mlx.core as mx; mx.disable_compile(); from mlx_lm.lora import main; main()' \
+  --model models/qwen35-2b-mlx-affine4 --train --data out/lora_short \
+  --batch-size 1 --num-layers 4 --learning-rate 1e-4 --max-seq-length 1152 \
+  --mask-prompt --grad-checkpoint --iters 120 --steps-per-report 5 \
+  --steps-per-eval 40 --val-batches 8 --save-every 40 --seed 1984 \
+  --adapter-path out/adapters/reproduction
+```
+
+Score decisions are in `docs/experiments/log.md`. The paired gate takes candidate predictions on both dev and the 105-item silver hold-out.
+
+### Export a trained adapter
+
+MLX stores Qwen3.5's RMSNorm weights after adding one and transposes the depthwise convolution kernels. Restore the Hugging Face conventions before running the GGUF converter. The converter virtual environment needs PyTorch, safetensors, and Transformers 5.22.2.
+
+The corrected GGUF matched MLX on 8 of 10 dev examples. Selection and submission use the exact GGUF runtime that was scored.
+
+```bash
+HF_HUB_OFFLINE=1 out/mac/venv/bin/mlx_lm.fuse \
+  --model models/qwen35-2b-mlx-affine4 --adapter-path out/adapters/v1 \
+  --save-path out/mac/fused-v1 --dequantize
+out/mac/convert-venv/bin/python src/train/restore_qwen_hf_layout.py \
+  out/mac/fused-v1 out/mac/fused-v1-hf
+HF_HUB_OFFLINE=1 out/mac/convert-venv/bin/python out/mac/llama.cpp/convert_hf_to_gguf.py \
+  out/mac/fused-v1-hf --model-name qwen35-2b-lora-v1 --outtype q8_0 \
+  --outfile models/qwen35-2b-lora-v1.q8_0.gguf
+```
