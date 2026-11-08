@@ -45,3 +45,14 @@ An upper-bound experiment that replaces chosen fields of a real prediction with 
 
 ### QWK cliff
 The scorer behaviour where polarity agreement reads as perfect when every matched aspect has the same polarity, then collapses to zero as soon as one gold label differs. It is a large tail risk for any system whose matched aspects all share one polarity.
+
+## Startup demo
+
+### Stand-in label
+A label written by a hosted frontier model (Gemini) in place of our local model until the local model is ready, and marked as such on every row so it is never shown as local or network-off output.
+
+### Triage candidate
+A speaker turn that names a side effect and meets all four minimum criteria for an individual safety case (a side effect, a suspect product, an identifiable patient, an identifiable reporter), each backed by a quote. It is a prompt for a safety reviewer to decide, never a claim that the case must be reported. A turn that names a side effect but misses a criterion stays visible as an incomplete record.
+
+### Gap view
+A grid of how each speaker group at an expert meeting, and the drug's public record, judge one drug on each aspect. An aspect is thin when one side barely mentions it, and split when groups disagree sharply. Each thin or split aspect becomes a suggested question for the next advisory board.
